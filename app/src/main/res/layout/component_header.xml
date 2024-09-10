@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- 가로로 공간을 채우는 빈 공간 -->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonId_undo"
+            android:layout_width="43dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="@drawable/arrow_back"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonId_next"
+            android:layout_width="42dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/arrow_next"
+            tools:layout_editor_absoluteX="304dp"
+            tools:layout_editor_absoluteY="16dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
