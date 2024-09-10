@@ -5,35 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-27dp"
+        tools:layout_editor_absoluteY="-217dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="150dp"
+            android:text="@string/app_name"
+            android:textSize="38sp"/>
+
+        <!-- marginTop 적용 -->
         <Button
             android:id="@+id/login"
-            android:layout_width="350dp"
-            android:layout_height="70dp"
-            android:text="로그인"
+            android:layout_width="353dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="300dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/white"
+            android:text="@string/login"
+            android:textColor="@color/black"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:backgroundTint="@color/white"
             tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="488dp"
-            android:layout_gravity="center"/>
+            tools:layout_editor_absoluteY="488dp" />
 
         <Button
             android:id="@+id/register"
             android:layout_width="350dp"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_button"
             android:backgroundTint="@color/black"
-            android:text="회원가입"
+            android:text="@string/register"
             android:textSize="28sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="30dp"
-            tools:layout_editor_absoluteY="571dp"
-            android:layout_gravity="center"/>
+            tools:layout_editor_absoluteY="571dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
