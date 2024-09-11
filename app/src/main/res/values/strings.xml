@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">질문해요</string>
+    <string name="app_name">eLink</string>
     <string name="login">로그인</string>
     <string name="register">회원가입</string>
-    <string name="undo">1</string>
-    <string name="next">2</string>
+    <string name="login_text">회원 로그인</string>
+    <string name="user_id">아이디</string>
+    <string name="user_pass">비밀번호</string>
 </resources>
