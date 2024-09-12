@@ -3,100 +3,161 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
 
-    <!-- 레이아웃 재사용 -->
-    <include layout="@layout/component_header" />
+    <!-- Header Component -->
+    <include
+        layout="@layout/component_header"
+        android:id="@+id/component_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Main Form Layout -->
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/component_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
 
-        <!-- Email -->
+        <!-- 이메일 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="81dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:id="@+id/textId_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="email" />
+                android:text="이메일"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/editText_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:hint="이메일을 입력하세요"
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:background="@android:drawable/edit_text"
+                android:textColor="@android:color/black"/>
         </LinearLayout>
 
-        <!-- Password -->
+        <!-- 비밀번호 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:id="@+id/textId_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="email" />
+                android:text="비밀번호"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/editText_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:hint="비밀번호를 입력하세요"
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:background="@android:drawable/edit_text"
+                android:textColor="@android:color/black"/>
         </LinearLayout>
 
-        <!-- name -->
+        <!-- 이름 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:id="@+id/textId_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="이름"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
 
             <EditText
-                android:id="@+id/editTextTextEmailAddress"
+                android:id="@+id/editText_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:hint="이름을 입력하세요"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:background="@android:drawable/edit_text"
+                android:textColor="@android:color/black"/>
         </LinearLayout>
 
-        <!-- Birth -->
+        <!-- 생년월일 -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:id="@+id/textId_birth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="생년월일"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
 
-            <EditText
-                android:id="@+id/editTextTextEmailAddress"
-                android:layout_width="match_parent"
+            <!-- 연도 Spinner -->
+            <Spinner
+                android:id="@+id/spinner_year"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:spinnerMode="dropdown" />
+
+            <!-- 월 Spinner -->
+            <Spinner
+                android:id="@+id/spinner_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:spinnerMode="dropdown" />
+
+            <!-- 일 Spinner -->
+            <Spinner
+                android:id="@+id/spinner_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
         </LinearLayout>
 
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="회원가입"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@android:color/white"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
