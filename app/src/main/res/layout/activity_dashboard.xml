@@ -63,7 +63,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/card_background"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +79,7 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/user_profile" />
+                android:layout_gravity="center_vertical"/>
 
             <!-- 사용자 텍스트 정보 -->
             <LinearLayout
@@ -119,7 +117,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="auto"
                 android:text="소식받기" />
         </LinearLayout>
 
@@ -128,8 +125,7 @@
             android:id="@+id/post_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/post_placeholder" />
+            android:layout_marginTop="8dp"/>
     </LinearLayout>
 
     <!-- 하단 네비게이션 바 -->
@@ -148,21 +144,18 @@
             android:id="@+id/nav_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_home"
             android:contentDescription="Home" />
 
         <ImageButton
             android:id="@+id/nav_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
             android:contentDescription="Add Post" />
 
         <ImageButton
             android:id="@+id/nav_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_profile"
             android:contentDescription="Profile" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
