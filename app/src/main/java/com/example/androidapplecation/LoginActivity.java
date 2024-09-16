@@ -1,8 +1,10 @@
 package com.example.androidapplecation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -30,6 +32,22 @@ public class LoginActivity extends BaseActivity {
                     LoginActivity.this,
                     "로그인 성공",
                     Toast.LENGTH_SHORT).show();
+        });
+
+
+        // 회원가입 TextView 찾기
+        TextView signUpText = findViewById(R.id.signin);
+
+        // 회원가입 TextView 클릭 리스너 설정
+        signUpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent를 사용해 회원가입 액티비티로 이동
+                Intent intent = new Intent(
+                        LoginActivity.this,
+                        RegisterActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }
