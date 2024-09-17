@@ -7,4 +7,20 @@
     <string name="user_pass">비밀번호</string>
     <string name="user_name">이름</string>
     <string name="user_birth">생년월일</string>
+
+    <!-- 월 데이터 배열 -->
+    <string-array name="month_array">
+        <item>1월</item>
+        <item>2월</item>
+        <item>3월</item>
+        <item>4월</item>
+        <item>5월</item>
+        <item>6월</item>
+        <item>7월</item>
+        <item>8월</item>
+        <item>9월</item>
+        <item>10월</item>
+        <item>11월</item>
+        <item>12월</item>
+    </string-array>
 </resources>
