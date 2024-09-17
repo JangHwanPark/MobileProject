@@ -8,9 +8,9 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.androidapplecation.activity.LoginActivity;
+import com.example.androidapplecation.activity.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
 

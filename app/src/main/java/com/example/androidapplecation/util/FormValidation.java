@@ -1,4 +1,4 @@
-package com.example.androidapplecation;
+package com.example.androidapplecation.util;
 
 import android.content.Context;
 import android.text.TextUtils;

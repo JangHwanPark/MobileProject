@@ -1,14 +1,15 @@
-package com.example.androidapplecation;
+package com.example.androidapplecation.activity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.example.androidapplecation.util.FormValidation;
+import com.example.androidapplecation.R;
 
 public class RegisterActivity extends BaseActivity {
 

@@ -1,9 +1,10 @@
-package com.example.androidapplecation;
+package com.example.androidapplecation.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.androidapplecation.R;
 
 public class BaseActivity extends AppCompatActivity {
 

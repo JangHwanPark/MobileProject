@@ -1,15 +1,15 @@
-package com.example.androidapplecation;
+package com.example.androidapplecation.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.androidapplecation.R;
 
 public class LoginActivity extends BaseActivity {
 
