@@ -9,7 +9,13 @@ public class UserRepository {
     private static UserRepository instance;
     private ArrayList<User> userList = new ArrayList<>();
 
-    private UserRepository() {}
+    private UserRepository() {
+        userList = new ArrayList<>();
+
+        // 기본 테스트 계정 추가
+        User testUser = new User("1@1.com", "1", "Test User", "1990", "01", "01");
+        userList.add(testUser);
+    }
 
     // 싱글톤 인스턴스 반환
     public static UserRepository getInstance() {

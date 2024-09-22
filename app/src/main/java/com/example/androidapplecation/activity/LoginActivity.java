@@ -10,11 +10,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.androidapplecation.MainActivity;
 import com.example.androidapplecation.R;
 import com.example.androidapplecation.UserRepository;
 import com.example.androidapplecation.model.User;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends BaseActivity {
 
@@ -26,16 +25,30 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // EditText 초기화
+        editTextEmail = findViewById(R.id.editTextEmail); // 이메일 입력 필드와 연결
+        editTextPassword = findViewById(R.id.editTextPassword); // 비밀번호 입력 필드와 연결
+
         // 버튼 클릭 시 뒤로 가기
         setupUndoButton();
 
-        // 뷰 초기화
+        // 버튼 초기화
         btnSubmit = findViewById(R.id.loginbutton);
-        
-        // 버튼 클릭 리스너
+
+        // 버튼 클릭 리스너 설정
         btnSubmit.setOnClickListener(v -> {
             String email = editTextEmail.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
+
+            // 이메일 또는 비밀번호가 비어 있는지 확인
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(
+                        LoginActivity.this,
+                        "아이디와 비밀번호를 입력해주세요.",
+                        Toast.LENGTH_SHORT
+                ).show();
+                return;
+            }
 
             // UserRepository에서 이메일로 유저를 검색
             User user = UserRepository.getInstance().findUserByEmail(email);
@@ -47,6 +60,16 @@ public class LoginActivity extends BaseActivity {
                         "로그인 성공!",
                         Toast.LENGTH_SHORT
                 ).show();
+
+                // 메인 컨텐츠 액티비티로 이동
+                Intent intent = new Intent(
+                        LoginActivity.this,
+                        DashboardActivity.class
+                );
+                startActivity(intent);
+
+                // 로그인 액티비티 종료
+                finish();
             } else {
                 // 로그인 실패
                 Toast.makeText(
@@ -57,20 +80,15 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-
-        // 회원가입 TextView 찾기
-        TextView signUpText = findViewById(R.id.signin);
-
         // 회원가입 TextView 클릭 리스너 설정
-        signUpText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Intent를 사용해 회원가입 액티비티로 이동
-                Intent intent = new Intent(
-                        LoginActivity.this,
-                        RegisterActivity.class);
-                startActivity(intent);
-            }
+        TextView signUpText = findViewById(R.id.signin);
+        signUpText.setOnClickListener(v -> {
+            // Intent를 사용해 회원가입 액티비티로 이동
+            Intent intent = new Intent(
+                    LoginActivity.this,
+                    RegisterActivity.class
+            );
+            startActivity(intent);
         });
     }
 }

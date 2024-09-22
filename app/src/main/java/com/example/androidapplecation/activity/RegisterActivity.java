@@ -55,13 +55,23 @@ public class RegisterActivity extends BaseActivity {
         for (int i = currentYear; i >= currentYear - 100; i--) {
             years.add(Integer.toString(i));
         }
-        ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
+
+        ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                years
+        );
+
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerYear.setAdapter(yearAdapter);
 
         // 월 설정 (1월 ~ 12월)
-        ArrayAdapter<CharSequence> monthAdapter = ArrayAdapter.createFromResource(this,
-                R.array.month_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> monthAdapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.month_array,
+                android.R.layout.simple_spinner_item
+        );
+
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonth.setAdapter(monthAdapter);
 
@@ -70,7 +80,12 @@ public class RegisterActivity extends BaseActivity {
         for (int i = 1; i <= 31; i++) {
             days.add(Integer.toString(i));
         }
-        ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, days);
+
+        ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item, days
+        );
+
         dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDay.setAdapter(dayAdapter);
 
