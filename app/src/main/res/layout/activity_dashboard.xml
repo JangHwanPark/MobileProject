@@ -69,6 +69,35 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp" />
 
+    <!-- 질문 답변 또는 멘토 찾기 탭을 위한 텍스트뷰 -->
+    <TextView
+        android:id="@+id/question_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:text="질문답변 화면입니다."
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar" />
+
+    <TextView
+        android:id="@+id/mentor_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:text="멘토찾기 화면입니다."
+        android:textSize="20sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar" />
+
     <!-- 하단 네비게이션 바 -->
     <LinearLayout
         android:id="@+id/navigation_bar"
