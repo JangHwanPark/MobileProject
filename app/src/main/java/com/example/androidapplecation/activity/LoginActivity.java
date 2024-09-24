@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.androidapplecation.MainActivity;
 import com.example.androidapplecation.R;
 import com.example.androidapplecation.UserRepository;
 import com.example.androidapplecation.model.User;
@@ -61,11 +60,8 @@ public class LoginActivity extends BaseActivity {
                         Toast.LENGTH_SHORT
                 ).show();
 
-                // 메인 컨텐츠 액티비티로 이동
-                Intent intent = new Intent(
-                        LoginActivity.this,
-                        DashboardActivity.class
-                );
+                // DashboardActivity로 이동
+                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                 startActivity(intent);
 
                 // 로그인 액티비티 종료
@@ -84,10 +80,7 @@ public class LoginActivity extends BaseActivity {
         TextView signUpText = findViewById(R.id.signin);
         signUpText.setOnClickListener(v -> {
             // Intent를 사용해 회원가입 액티비티로 이동
-            Intent intent = new Intent(
-                    LoginActivity.this,
-                    RegisterActivity.class
-            );
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
     }

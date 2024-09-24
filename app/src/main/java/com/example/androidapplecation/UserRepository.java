@@ -12,9 +12,18 @@ public class UserRepository {
     private UserRepository() {
         userList = new ArrayList<>();
 
-        // 기본 테스트 계정 추가
-        User testUser = new User("1@1.com", "1", "Test User", "1990", "01", "01");
-        userList.add(testUser);
+        for (int i = 0; i <= 10; i++) {
+            // 기본 테스트 계정 추가
+            User testUser = new User(
+                    "" + i,
+                    "1",
+                    "Test User" + i + 1,
+                    "1990",
+                    "01",
+                    "01"
+            );
+            userList.add(testUser);
+        }
     }
 
     // 싱글톤 인스턴스 반환
