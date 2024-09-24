@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <!-- 사용자 정보 -->
+    <!-- 사용자 정보 첫 번째 줄 (이미지, 이름, 소속 회사, 팔로우 버튼) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical">
 
         <!-- 사용자 이미지 -->
         <ImageView
@@ -23,7 +25,7 @@
             android:src="@drawable/ic_launcher_foreground"
             android:contentDescription="User Image" />
 
-        <!-- 사용자 텍스트 정보 -->
+        <!-- 사용자 텍스트 정보 (이름, 회사) -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,6 +33,7 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
+            <!-- 사용자 이름 -->
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
@@ -38,26 +41,21 @@
                 android:text="User Name"
                 android:textStyle="bold" />
 
+            <!-- 사용자 회사 -->
             <TextView
                 android:id="@+id/user_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User Company" />
-
-            <TextView
-                android:id="@+id/post_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Post Date" />
         </LinearLayout>
 
-        <!-- 채우기용 뷰 -->
+        <!-- 공간 채우기 -->
         <View
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <!-- 소식받기 버튼 -->
+        <!-- 팔로우 버튼 -->
         <ImageButton
             android:id="@+id/follow_button"
             android:layout_width="wrap_content"
