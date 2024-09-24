@@ -1,4 +1,4 @@
-package com.example.androidapplecation;
+package com.example.androidapplecation.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androidapplecation.R;
 import com.example.androidapplecation.model.Board;
 
 import java.util.ArrayList;

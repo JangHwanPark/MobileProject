@@ -7,12 +7,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androidapplecation.BoardAdapter;
+import com.example.androidapplecation.adapter.BoardAdapter;
 import com.example.androidapplecation.adapter.UserAdapter;
+
 import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.repository.BoardRepository;
 import com.example.androidapplecation.R;

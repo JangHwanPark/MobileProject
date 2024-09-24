@@ -27,9 +27,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         public ViewHolder(View view) {
             super(view);
-            userImage = view.findViewById(R.id.user_image);
-            userName = view.findViewById(R.id.user_name);
-            userCompany = view.findViewById(R.id.user_company);
+            userImage = view.findViewById(R.id.mentor_user_image);
+            userName = view.findViewById(R.id.mentor_user_name);
+            userCompany = view.findViewById(R.id.mentor_user_company);
             followButton = view.findViewById(R.id.follow_button);
         }
     }
@@ -51,7 +51,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = userList.get(position);
         holder.userName.setText(user.getName());
-        holder.userCompany.setText("소속회사 없음"); // user.getCompany()
+        // holder.userCompany.setText("소속회사 없음"); // user.getCompany()
     }
 
     @Override
