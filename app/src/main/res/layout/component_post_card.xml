@@ -51,12 +51,15 @@
             android:layout_weight="1" />
 
         <!-- 소식받기 버튼 -->
-        <Button
+        <ImageButton
             android:id="@+id/follow_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="소식받기" />
+            android:src="@drawable/ic_follow"
+            android:background="@drawable/round_button"
+            android:padding="10dp"
+            android:contentDescription="Add Post" />
     </LinearLayout>
 
     <!-- 게시물 내용 -->

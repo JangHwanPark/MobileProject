@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     public static class BoardViewHolder extends RecyclerView.ViewHolder {
         public TextView userName, userCompany, postDate, postContent;
         public ImageView userImage;
-        public Button followButton;
+        public ImageButton followButton;
 
         public BoardViewHolder(View itemView) {
             super(itemView);
