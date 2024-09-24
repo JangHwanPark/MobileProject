@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
 
     <!-- Header Component -->
     <include
@@ -15,5 +16,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:text="test"/>
+    <!-- 게시글 제목 입력 -->
+    <EditText
+        android:id="@+id/edit_post_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="제목을 입력하세요"
+        android:textSize="18sp"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/component_header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- 게시글 내용 입력 -->
+    <EditText
+        android:id="@+id/edit_post_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="내용을 입력하세요"
+        android:inputType="textMultiLine"
+        android:minLines="10"
+        android:gravity="top|start"
+        app:layout_constraintTop_toBottomOf="@id/edit_post_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_save_post"
+        android:layout_marginTop="16dp" />
+
+    <!-- 게시글 저장 버튼 -->
+    <Button
+        android:id="@+id/button_save_post"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="게시글 저장"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
