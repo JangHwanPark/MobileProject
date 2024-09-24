@@ -1,14 +1,20 @@
 package com.example.androidapplecation.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.androidapplecation.BoardRepository;
+
+import com.example.androidapplecation.BoardAdapter;
+import com.example.androidapplecation.repository.BoardRepository;
 import com.example.androidapplecation.R;
-import com.example.androidapplecation.adapter.BoardAdapter;
+
 import com.example.androidapplecation.model.Board;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
@@ -16,10 +22,12 @@ import java.util.ArrayList;
 public class DashboardActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private TextView questionTextView, mentorTextView;
+    private TextView  questionTextView;
     private BoardAdapter boardAdapter;
     private ArrayList<Board> boardList;
     private Button timelineTab, questionTab, mentorTab;
+    private ImageButton homeButton, createPostButton, accountButton;
+    private ConstraintLayout mentorTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +40,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         // TextView 초기화
         questionTextView = findViewById(R.id.question_text);
-        mentorTextView = findViewById(R.id.mentor_text);
+        mentorTextView = (ConstraintLayout) findViewById(R.id.user_card);
 
         // BoardRepository에서 게시글 목록 가져오기
         boardList = BoardRepository.getInstance().getBoardList();
@@ -57,6 +65,29 @@ public class DashboardActivity extends AppCompatActivity {
 
         // 멘토찾기 탭 클릭 시 TextView 표시
         mentorTab.setOnClickListener(v -> showMentorView());
+
+        // Footer View
+        homeButton = findViewById(R.id.footer_home);
+        homeButton.setOnClickListener(v -> showRecyclerView());
+
+        // Footer View - 게시글 작성 버튼
+        createPostButton = findViewById(R.id.post_add);
+        createPostButton.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    DashboardActivity.this,
+                    CreatePostActivity.class);
+            startActivity(intent);
+        });
+
+        // Footer View - 사용자 정보 버튼
+        accountButton = findViewById(R.id.footer_account);
+        accountButton.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    DashboardActivity.this,
+                    UserAccountActivity.class
+            );
+            startActivity(intent);
+        });
     }
 
     // RecyclerView를 보여주는 메서드

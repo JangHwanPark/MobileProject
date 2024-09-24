@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.androidapplecation.UserRepository;
+import com.example.androidapplecation.repository.UserRepository;
 import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.util.FormValidation;
 import com.example.androidapplecation.R;
@@ -69,8 +69,7 @@ public class RegisterActivity extends BaseActivity {
         ArrayAdapter<CharSequence> monthAdapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.month_array,
-                android.R.layout.simple_spinner_item
-        );
+                android.R.layout.simple_spinner_item);
 
         monthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMonth.setAdapter(monthAdapter);

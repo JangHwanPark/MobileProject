@@ -1,4 +1,4 @@
-package com.example.androidapplecation;
+package com.example.androidapplecation.repository;
 
 import com.example.androidapplecation.model.Board;
 

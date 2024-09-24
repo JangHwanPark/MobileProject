@@ -4,13 +4,7 @@
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#6200EA" /> <!-- 버튼 배경색 (보라색) -->
-            <corners android:radius="12dp" /> <!-- 둥근 모서리 -->
-            <padding
-                android:left="10dp"
-                android:right="10dp"
-                android:top="5dp"
-                android:bottom="5dp" />
+            <solid android:color="#fff" /> <!-- 버튼 배경색 (보라색) -->
         </shape>
     </item>
 </ripple>

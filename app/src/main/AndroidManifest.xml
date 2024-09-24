@@ -25,6 +25,8 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.BaseActivity" />
         <activity android:name=".activity.DashboardActivity" />
+        <activity android:name=".activity.CreatePostActivity" />
+        <activity android:name=".activity.UserAccountActivity" />
     </application>
 
 </manifest>

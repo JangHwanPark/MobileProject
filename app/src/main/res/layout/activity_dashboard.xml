@@ -23,37 +23,33 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/search_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/timeline_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/primary_button"
             android:text="타임라인" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/question_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/primary_button"
             android:text="질문답변" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/mentor_tab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:background="@drawable/primary_button"
             android:text="멘토찾기" />
     </LinearLayout>
 
@@ -82,20 +78,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/component_footer" />
 
-    <TextView
-        android:id="@+id/mentor_text"
+    <include
+        layout="@layout/component_user_card"
+        android:id="@+id/user_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:text="멘토찾기 화면입니다."
-        android:textSize="20sp"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/tab_layout"
+        app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/component_footer" />
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- 하단 네비게이션 바 -->
     <include
