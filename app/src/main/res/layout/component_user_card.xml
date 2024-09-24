@@ -35,7 +35,7 @@
 
             <!-- 사용자 이름 -->
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/mentor_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User Name"
@@ -43,7 +43,7 @@
 
             <!-- 사용자 회사 -->
             <TextView
-                android:id="@+id/user_company"
+                android:id="@+id/mentor_user_company"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User Company" />
@@ -57,7 +57,7 @@
 
         <!-- 팔로우 버튼 -->
         <ImageButton
-            android:id="@+id/follow_button"
+            android:id="@+id/mentor_follow_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

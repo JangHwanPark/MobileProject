@@ -12,22 +12,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidapplecation.BoardAdapter;
+import com.example.androidapplecation.adapter.UserAdapter;
+import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.repository.BoardRepository;
 import com.example.androidapplecation.R;
 
 import com.example.androidapplecation.model.Board;
+import com.example.androidapplecation.repository.UserRepository;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView, mentorInfoView;
     private TextView  questionTextView;
-    private BoardAdapter boardAdapter;
-    private ArrayList<Board> boardList;
     private Button timelineTab, questionTab, mentorTab;
     private ImageButton homeButton, createPostButton, accountButton;
-    private ConstraintLayout mentorTextView;
+
+    private BoardAdapter boardAdapter;
+    private UserAdapter userAdapter;
+
+    private ArrayList<Board> boardList;
+    private ArrayList<User> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +47,22 @@ public class DashboardActivity extends AppCompatActivity {
 
         // TextView 초기화
         questionTextView = findViewById(R.id.question_text);
-        mentorTextView = (ConstraintLayout) findViewById(R.id.user_card);
+
+        mentorInfoView = findViewById(R.id.recycler_user_card);
+        mentorInfoView.setLayoutManager(new LinearLayoutManager(this));
 
         // BoardRepository에서 게시글 목록 가져오기
         boardList = BoardRepository.getInstance().getBoardList();
 
+        // UserRepository에서 사용자 목록 가져오기
+        userList = UserRepository.getInstance().getUserList();
+
         // 어댑터 설정
         boardAdapter = new BoardAdapter(boardList);
         recyclerView.setAdapter(boardAdapter);
+
+        userAdapter = new UserAdapter(userList);
+        mentorInfoView.setAdapter(userAdapter);
 
         // 탭 버튼 초기화
         timelineTab = findViewById(R.id.timeline_tab);
@@ -94,20 +109,20 @@ public class DashboardActivity extends AppCompatActivity {
     private void showRecyclerView() {
         recyclerView.setVisibility(View.VISIBLE);
         questionTextView.setVisibility(View.GONE);
-        mentorTextView.setVisibility(View.GONE);
+        mentorInfoView.setVisibility(View.GONE);
     }
 
     // 질문답변 TextView를 보여주는 메서드
     private void showQuestionView() {
         recyclerView.setVisibility(View.GONE);
         questionTextView.setVisibility(View.VISIBLE);
-        mentorTextView.setVisibility(View.GONE);
+        mentorInfoView.setVisibility(View.GONE);
     }
 
     // 멘토찾기 TextView를 보여주는 메서드
     private void showMentorView() {
         recyclerView.setVisibility(View.GONE);
         questionTextView.setVisibility(View.GONE);
-        mentorTextView.setVisibility(View.VISIBLE);
+        mentorInfoView.setVisibility(View.VISIBLE);
     }
 }
