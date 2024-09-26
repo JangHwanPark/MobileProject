@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/edit_text"
                 android:hint="비밀번호를 입력하세요"
-                android:text="1"
+                android:text="123456"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@android:color/black" />
