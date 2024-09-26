@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_create_post);
+        setContentView(R.layout.activity_main);
 
         // 모든 사용자를 가져와서 출력
         ArrayList<User> users = UserRepository.getInstance().getUserList();
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "User Email: " + user.getEmail() + ", Name: " + user.getName());
         }
 
-        /*Button loginButton = (Button) findViewById(R.id.login);
+        Button loginButton = (Button) findViewById(R.id.login);
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
 
-        /*Button registerButton = (Button) findViewById(R.id.register);
+        Button registerButton = (Button) findViewById(R.id.register);
         registerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -50,6 +50,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 }
