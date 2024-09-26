@@ -41,18 +41,6 @@
         app:layout_constraintTop_toBottomOf="@id/edit_post_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/button_save_post"
-        android:layout_marginTop="16dp" />
-
-    <!-- 게시글 저장 버튼 -->
-    <Button
-        android:id="@+id/button_save_post"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="게시글 저장"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

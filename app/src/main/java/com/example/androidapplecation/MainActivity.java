@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_user_account);
+        setContentView(R.layout.activity_create_post);
 
         // 모든 사용자를 가져와서 출력
         ArrayList<User> users = UserRepository.getInstance().getUserList();
