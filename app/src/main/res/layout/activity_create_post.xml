@@ -17,7 +17,7 @@
 
     <!-- 게시글 제목 입력 -->
     <EditText
-        android:id="@+id/edit_post_title"
+        android:id="@+id/question_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -31,7 +31,7 @@
 
     <!-- 게시글 내용 입력 -->
     <EditText
-        android:id="@+id/edit_post_content"
+        android:id="@+id/question_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
@@ -44,5 +44,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_post_title" />
+        app:layout_constraintTop_toBottomOf="@id/question_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

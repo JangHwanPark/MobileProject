@@ -26,7 +26,7 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardAdapter.BoardViewHol
     @Override
     public BoardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.component_post_card, parent, false); // 게시물 카드 레이아웃을 사용
+                .inflate(R.layout.component_post_card, parent, false);
         return new BoardViewHolder(view);
     }
 

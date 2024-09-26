@@ -35,7 +35,7 @@ public class QuestionRepository {
         }
     }
 
-    public ArrayList<Question> getQuestionsList() {
+    public ArrayList<Question> getQuestionList() {
         return questionsList;
     }
 
