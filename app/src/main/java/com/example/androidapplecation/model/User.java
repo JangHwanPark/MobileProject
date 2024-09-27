@@ -4,23 +4,17 @@ public class User {
     private String email;
     private String password;
     private String name;
-    private String year;
-    private String month;
-    private String day;
+    private String birth;
 
     public User(
             String email,
             String password,
             String name,
-            String year,
-            String month,
-            String day) {
+            String birth) {
         this.email = email;
         this.password = password;
         this.name = name;
-        this.year = year;
-        this.month = month;
-        this.day = day;
+        this.birth = birth;
     }
 
     public String getEmail() {
@@ -44,24 +38,10 @@ public class User {
         this.name = name;
     }
 
-    public String getYear() {
-        return year;
+    public String getBirth() {
+        return birth;
     }
-    public void setYear(String year) {
-        this.year = year;
-    }
-
-    public String getMonth() {
-        return month;
-    }
-    public void setMonth(String month) {
-        this.month = month;
-    }
-
-    public String getDay() {
-        return day;
-    }
-    public void setDay(String day) {
-        this.day = day;
+    public void setBirth(String year) {
+        this.birth = birth;
     }
 }

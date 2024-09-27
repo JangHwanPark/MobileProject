@@ -23,8 +23,10 @@
         android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="70dp"
         android:orientation="vertical"
+        android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,8 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textId_birth"
@@ -127,29 +128,16 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
-            <!-- 연도 Spinner -->
-            <Spinner
-                android:id="@+id/spinner_year"
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/editText_birth"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:spinnerMode="dropdown" />
-
-            <!-- 월 Spinner -->
-            <Spinner
-                android:id="@+id/spinner_month"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:spinnerMode="dropdown" />
-
-            <!-- 일 Spinner -->
-            <Spinner
-                android:id="@+id/spinner_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown" />
+                android:background="@android:drawable/edit_text"
+                android:hint="생년월일 ex) 20240101"
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:text="20240101"
+                android:textColor="@android:color/black" />
         </LinearLayout>
 
         <!-- Submit Button -->
@@ -164,16 +152,6 @@
             android:textColor="@android:color/white"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="240dp"
-            android:gravity="center_horizontal"
-            android:text="@string/app_name"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

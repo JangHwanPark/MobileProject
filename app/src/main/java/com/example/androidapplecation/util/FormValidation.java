@@ -4,13 +4,11 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 public class FormValidation {
 
-    private EditText editTextEmail, editTextPassword, editTextName;
-    private Spinner spinnerYear, spinnerMonth, spinnerDay;
+    private EditText editTextEmail, editTextPassword, editTextName, editTextBirth;
     private Context context;
 
     // 생성자: Context와 필요한 View들을 전달받음
@@ -19,18 +17,14 @@ public class FormValidation {
             EditText editTextEmail,
             EditText editTextPassword,
             EditText editTextName,
-            Spinner spinnerYear,
-            Spinner spinnerMonth,
-            Spinner spinnerDay
+            EditText editTextBirth
     ) {
 
         this.context = context;
         this.editTextEmail = editTextEmail;
         this.editTextPassword = editTextPassword;
         this.editTextName = editTextName;
-        this.spinnerYear = spinnerYear;
-        this.spinnerMonth = spinnerMonth;
-        this.spinnerDay = spinnerDay;
+        this.editTextBirth = editTextBirth;
     }
 
     // 폼 유효성 검사 함수
@@ -62,11 +56,10 @@ public class FormValidation {
             return false;
         }
 
-        // 생년월일 Spinner 유효성 검사 (사용자가 선택했는지 확인)
-        if (spinnerYear.getSelectedItemPosition() == 0 ||
-                spinnerMonth.getSelectedItemPosition() == 0 ||
-                spinnerDay.getSelectedItemPosition() == 0) {
-            Toast.makeText(context, "생년월일을 선택하세요", Toast.LENGTH_SHORT).show();
+        // 생년월일 유효성 검사
+        String birth = editTextBirth.getText().toString().trim();
+        if (TextUtils.isEmpty(birth)) {
+            editTextBirth.setError("생년월일을 입력하세요.");
             return false;
         }
 

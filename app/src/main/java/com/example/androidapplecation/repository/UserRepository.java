@@ -18,9 +18,7 @@ public class UserRepository {
                     "" + i,
                     "1",
                     "Test User" + i + 1,
-                    "1990",
-                    "01",
-                    "01"
+                    "19900101"
             );
             userList.add(testUser);
         }
