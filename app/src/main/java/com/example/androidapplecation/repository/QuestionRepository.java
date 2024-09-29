@@ -39,6 +39,7 @@ public class QuestionRepository {
         return questionsList;
     }
 
+    // 메모리 내 데이터를 저장하는 로직
     public void addQuestion(Question question) {
         questionsList.add(question);
     }
