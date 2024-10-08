@@ -70,6 +70,10 @@ public class DashboardActivity extends BaseActivity {
 
         // 하단 네비게이션 바의 버튼 리스너 설정
         setupFooterButtonListeners();
+
+        // 로그
+        BoardRepository.getInstance().logAllBoards();
+        QuestionRepository.getInstance().logAllQuestion();
     }
 
     // 뷰 초기화 메서드

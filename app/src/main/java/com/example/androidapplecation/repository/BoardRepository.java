@@ -1,5 +1,7 @@
 package com.example.androidapplecation.repository;
 
+import android.util.Log;
+
 import com.example.androidapplecation.model.Board;
 
 import java.util.ArrayList;
@@ -44,5 +46,13 @@ public class BoardRepository {
     // 새로운 게시글을 추가하는 메서드
     public void addBoard(Board board) {
         boardList.add(board);
+    }
+
+    // 전체 게시글을 로그로 출력하는 메서드
+    public void logAllBoards() {
+        Log.d("BoardRepository", "전체 게시글 목록 출력:");
+        for (Board board : boardList) {
+            Log.d("BoardRepository", "작성자: " + board.getName() + ", 제목: " + board.getTitle() + ", 내용: " + board.getArticle() + ", 작성일: " + board.getDate().toString());
+        }
     }
 }

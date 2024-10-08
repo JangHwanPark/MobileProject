@@ -29,6 +29,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/component_header" />
 
+    <!-- 카테고리 선택 (질문하기, 자유 게시판) -->
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question_title" />
+
     <!-- 게시글 내용 입력 -->
     <EditText
         android:id="@+id/question_content"
@@ -44,5 +54,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question_title" />
+        app:layout_constraintTop_toBottomOf="@id/category_spinner" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
