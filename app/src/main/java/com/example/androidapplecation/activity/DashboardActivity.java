@@ -2,9 +2,11 @@ package com.example.androidapplecation.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +22,7 @@ import com.example.androidapplecation.repository.UserRepository;
 import java.util.ArrayList;
 
 public class DashboardActivity extends BaseActivity {
+    private static final String TAG = "DashboardActivity";  // 로그 태그
 
     private RecyclerView recyclerView, mentorInfoView, questionRecyclerView;
     private Button timelineTab, questionTab, mentorTab;
@@ -33,6 +36,26 @@ public class DashboardActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        // SearchView 초기화
+        SearchView searchView = findViewById(R.id.search_view);
+
+        // SearchView 리스너 설정
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // 사용자가 검색어를 제출했을 때
+                Log.d(TAG, "검색어 제출: " + query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // 검색어 입력이 변경될 때
+                Log.d(TAG, "검색어 입력 중: " + newText);
+                return false;
+            }
+        });
 
         // 초기화 메서드 호출
         initializeViews();
