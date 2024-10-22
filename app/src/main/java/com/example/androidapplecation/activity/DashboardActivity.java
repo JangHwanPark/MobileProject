@@ -6,12 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androidapplecation.adapter.BoardAdapter;
 import com.example.androidapplecation.adapter.QuestionAdapter;
 import com.example.androidapplecation.adapter.UserAdapter;
 import com.example.androidapplecation.model.Question;
@@ -31,13 +32,9 @@ import retrofit2.Response;
 
 public class DashboardActivity extends BaseActivity {
     private static final String TAG = "DashboardActivity";  // 로그 태그
-
     private RecyclerView recyclerView, mentorInfoView, questionRecyclerView;
     private Button timelineTab, questionTab, mentorTab;
     private ImageButton homeButton, createPostButton, accountButton;
-
-    private BoardAdapter boardAdapter;
-    private UserAdapter userAdapter;
     private QuestionAdapter questionAdapter;
 
     @Override
@@ -72,9 +69,7 @@ public class DashboardActivity extends BaseActivity {
 
         // 서버에서 데이터 호출
         loadQuestions();
-
-        // 기본적으로 타임라인(RecyclerView)를 출력
-        showRecyclerView();
+        loadFreeBoard();
 
         // 탭 버튼 리스너 설정
         setupTabListeners();
@@ -90,13 +85,14 @@ public class DashboardActivity extends BaseActivity {
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
         // 서버에서 질문 데이터를 가져옴
-        Call<List<Question>> call = apiService.getCategoryQuestion();
-        call.enqueue(new Callback<List<Question>>() {
+        Call<List<Question>> callQuestionData = apiService.getCategoryQuestion();
+        callQuestionData.enqueue(new Callback<List<Question>>() {
             @Override
-            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+            public void onResponse(
+                    @NonNull Call<List<Question>> call,
+                    @NonNull Response<List<Question>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Question> questions = response.body();
-                    // 필요시 ArrayList로 변환
                     ArrayList<Question> questionArrayList = new ArrayList<>(questions);
 
                     // 질문 데이터를 어댑터에 설정
@@ -108,6 +104,37 @@ public class DashboardActivity extends BaseActivity {
                     Log.e(TAG, "질문 데이터를 가져오지 못했습니다.");
                 }
             }
+
+            @Override
+            public void onFailure(Call<List<Question>> call, Throwable t) {
+                Log.e(TAG, "서버 통신 오류: " + t.getMessage());
+            }
+        });
+    }
+
+    private void loadFreeBoard() {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // 서버에서 자유게시판 데이터를 가져옴
+        Call<List<Question>> callFreeBoardData = apiService.getCategoryFreeBoard();
+        callFreeBoardData.enqueue(new Callback<List<Question>>() {
+            @Override
+            public void onResponse(
+                    @NonNull Call<List<Question>> call,
+                    @NonNull Response<List<Question>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Question> questions = response.body();
+                    ArrayList<Question> freeBoardList = new ArrayList<>(questions);
+
+                    questionAdapter = new QuestionAdapter(freeBoardList);
+                    recyclerView.setAdapter(questionAdapter);
+                    questionAdapter.notifyDataSetChanged();
+                    Log.d(TAG, "자유게시판 데이터를 성공적으로 가져왔습니다.");
+                } else {
+                    Log.e(TAG, "자유게시판 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
+                }
+            }
+
 
             @Override
             public void onFailure(Call<List<Question>> call, Throwable t) {
@@ -139,12 +166,8 @@ public class DashboardActivity extends BaseActivity {
 
     // 어댑터 초기화 메서드
     private void initializeAdapters() {
-        // BoardRepository에서 게시글 목록 가져오기 및 어댑터 설정
-        boardAdapter = new BoardAdapter(BoardRepository.getInstance().getBoardList());
-        recyclerView.setAdapter(boardAdapter);
-
         // UserRepository에서 사용자 목록 가져오기 및 어댑터 설정
-        userAdapter = new UserAdapter(UserRepository.getInstance().getUserList());
+        UserAdapter userAdapter = new UserAdapter(UserRepository.getInstance().getUserList());
         mentorInfoView.setAdapter(userAdapter);
         questionRecyclerView.setAdapter(questionAdapter);
     }
@@ -152,12 +175,16 @@ public class DashboardActivity extends BaseActivity {
     // 하단 버튼(글 작성, 사용자 정보 등) 초기화
     private void initializeFooterButtons() {
         createPostButton.setOnClickListener(v -> {
-            Intent intent = new Intent(DashboardActivity.this, CreatePostActivity.class);
+            Intent intent = new Intent(
+                    DashboardActivity.this,
+                    CreatePostActivity.class);
             startActivity(intent);
         });
 
         accountButton.setOnClickListener(v -> {
-            Intent intent = new Intent(DashboardActivity.this, UserAccountActivity.class);
+            Intent intent = new Intent(
+                    DashboardActivity.this,
+                    UserAccountActivity.class);
             startActivity(intent);
         });
     }

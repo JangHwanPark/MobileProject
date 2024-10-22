@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button registerButton = findViewById(R.id.register);
-        registerButton.setOnClickListener(view -> {ㄴ
+        registerButton.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
             startActivity(intent);
         });
