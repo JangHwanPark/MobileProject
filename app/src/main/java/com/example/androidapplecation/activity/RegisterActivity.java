@@ -7,12 +7,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.androidapplecation.network.ApiService;
+import com.example.androidapplecation.network.RetrofitClient;
 import com.example.androidapplecation.repository.UserRepository;
 import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.util.FormValidation;
 import com.example.androidapplecation.R;
+
+import retrofit2.Call;
 
 public class RegisterActivity extends BaseActivity {
 
@@ -61,6 +66,8 @@ public class RegisterActivity extends BaseActivity {
 
     // 유저 등록 처리 메서드
     private void registerUser() {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
         // 유효성 검사가 성공했을 때 처리 로직
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -69,22 +76,53 @@ public class RegisterActivity extends BaseActivity {
 
         // 새로운 User 객체 생성 및 UserRepository에 저장
         User newUser = new User(email, password, name, birth);
+        Call<Void> callUser = apiService.registerUser(newUser);
         UserRepository.getInstance().addUser(newUser);  // 싱글톤에 저장
+
+        // 네트워크 요청 비동기 처리
+        callUser.enqueue(new retrofit2.Callback<Void>() {
+            @Override
+            public void onResponse(
+                    @NonNull Call<Void> call,
+                    @NonNull retrofit2.Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // 서버 응답이 성공적일 때 처리
+                    Toast.makeText(RegisterActivity.this, "회원가입 성공!", Toast.LENGTH_SHORT).show();
+
+                    // 로그 출력
+                    Log.d(TAG, "User registered: " + newUser.getEmail() + ", " + newUser.getName());
+
+                    // 로그인 페이지로 이동
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();  // 회원가입 후 현재 액티비티를 종료
+                } else {
+                    // 서버 응답이 실패일 때 처리
+                    Toast.makeText(RegisterActivity.this, "회원가입 실패: " + response.message(), Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "회원가입 실패: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // 네트워크 오류 또는 서버와의 통신 실패
+                Toast.makeText(RegisterActivity.this, "서버와의 통신에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "서버 통신 오류: " + t.getMessage());
+            }
+        });
 
         // 회원가입 성공 메시지
         Toast.makeText(
                 RegisterActivity.this,
                 "회원가입 성공!",
-                Toast.LENGTH_SHORT
-        ).show();
+                Toast.LENGTH_SHORT).show();
 
         // 로그 출력
         Log.d(TAG, "User registered: " + newUser.getEmail() + ", " + newUser.getName());
 
         Intent intent = new Intent(
                 RegisterActivity.this,
-                LoginActivity.class
-        );
+                LoginActivity.class);
         startActivity(intent);
     }
 }

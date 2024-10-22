@@ -1,5 +1,6 @@
 package com.example.androidapplecation.network;
 import com.example.androidapplecation.model.Question;
+import com.example.androidapplecation.model.User;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ import retrofit2.http.POST;
 
 public interface ApiService {
     // (회원가입) 사용자 계정을 서버에 저장하는 POST 요청
+    @POST("/post/user/register")
+    Call<Void> registerUser(@Body User user);
 
     // 질문을 서버에 저장하는 POST 요청
     @POST("/post/question/save")
