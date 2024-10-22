@@ -1,6 +1,9 @@
 package com.example.androidapplecation.activity;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -8,14 +11,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.androidapplecation.R;
-import com.example.androidapplecation.model.Board;
 import com.example.androidapplecation.model.Question;
-import com.example.androidapplecation.model.User;
-import com.example.androidapplecation.repository.BoardRepository;
-import com.example.androidapplecation.repository.QuestionRepository;
+import com.example.androidapplecation.network.ApiService;
+import com.example.androidapplecation.network.RetrofitClient;
 
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreatePostActivity extends BaseActivity {
 
@@ -46,44 +53,61 @@ public class CreatePostActivity extends BaseActivity {
         submitButton = findViewById(R.id.header_btn_check);
         submitButton.setVisibility(View.VISIBLE);
         submitButton.setOnClickListener(v -> {
+            // String author =
             String title = titleEditText.getText().toString();
             String content = contentEditText.getText().toString();
             String category = categorySpinner.getSelectedItem().toString();  // 선택된 카테고리 가져오기
 
             if (category.equals("질문하기")) {
-                // Question 객체 생성 및 저장
-                Question newQuestion = new Question(
-                        "id" + (QuestionRepository.getInstance().getQuestionList().size() + 1), // 새로운 ID
-                        title,  // 제목
-                        content, // 내용
-                        "test user",  // 작성자 (임의로 설정)
-                        "qid" + (QuestionRepository.getInstance().getQuestionList().size() + 1), // 질문 ID
-                        new Date(),  // 생성 날짜
-                        new Date()   // 수정 날짜
-                );
+                // Question 객체 생성
+                Question newQuestion = new Question(null, 1, title, content, category, new Date(), new Date());
 
-                // QuestionRepository에 저장
-                QuestionRepository.getInstance().addQuestion(newQuestion);
-
-                Toast.makeText(CreatePostActivity.this, "질문이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                // Retrofit으로 POST 요청 보내기
+                sendQuestionToServer(newQuestion);
 
             } else if (category.equals("자유 게시판")) {
-                // Board 객체 생성 및 저장
-                Board newBoard = new Board(
-                        "test user",  // 작성자 (임의로 설정)
-                        title,  // 제목
-                        content,  // 내용
-                        new Date()  // 작성일
-                );
-
-                // BoardRepository에 저장
-                BoardRepository.getInstance().addBoard(newBoard);
-
-                Toast.makeText(CreatePostActivity.this, "게시물이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                // 자유 게시판 로직 처리
             }
 
             // 액티비티 종료 후 이전화면으로 돌아가기
             finish();
+        });
+    }
+
+    private void sendQuestionToServer(Question question) {
+        // Retrofit 클라이언트 생성
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // 질문을 서버로 전송
+        Call<Void> call = apiService.saveQuestion(question);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "서버에 질문이 성공적으로 저장되었습니다.");
+                    // 성공적으로 저장됨
+                    Toast.makeText(
+                            CreatePostActivity.this,
+                            "질문이 서버에 저장되었습니다.",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e(TAG, "서버에 질문 저장 실패: " + response.errorBody());
+                    // 저장 실패
+                    Toast.makeText(
+                            CreatePostActivity.this,
+                            "질문 저장에 실패했습니다.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // 네트워크 오류 처리
+                Toast.makeText(
+                        CreatePostActivity.this,
+                        "서버와의 통신에 실패했습니다.",
+                        Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

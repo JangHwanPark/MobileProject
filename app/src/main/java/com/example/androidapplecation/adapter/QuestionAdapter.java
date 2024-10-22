@@ -1,6 +1,5 @@
 package com.example.androidapplecation.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,9 +41,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         holder.contentTextView.setText(question.getContent() != null
                 ? question.getContent()
                 : "No Content");
-        holder.authorTextView.setText(question.getAuthor() != null
-                ? question.getAuthor()
-                : "작성자 없음");
         holder.dateTextView.setText(question.getCreatedAt() != null
                 ? question.getCreatedAt().toString()
                 : "날짜 없음");

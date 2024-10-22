@@ -3,40 +3,51 @@ package com.example.androidapplecation.model;
 import java.util.Date;
 
 public class Question {
-    private String id;
+    private Integer qid;
+    private int uid;
     private String title;
     private String content;
-    private String author;
+    // private String author;
     private String questionId;  // 관련 질문 ID
     private Date createdAt;
     private Date updatedAt;
 
     // Constructor
     public Question(
-            String id,
+            Integer qid,
+            int uid,
             String title,
             String content,
-            String author,
+            // String author,
             String questionId,
             Date createdAt,
             Date updatedAt
     ) {
-        this.id = id;
+        this.qid = qid;
+        this.uid = uid;
         this.title = title;
         this.content = content;
-        this.author = author;
+        // this.author = author;
         this.questionId = questionId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
     // Getters and Setters
-    public String getId() {
-        return id;
+    public Integer getId() {
+        return qid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(Integer qid) {
+        this.qid = qid;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {
@@ -53,14 +64,6 @@ public class Question {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getQuestionId() {

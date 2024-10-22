@@ -16,7 +16,7 @@ import com.example.androidapplecation.adapter.QuestionAdapter;
 import com.example.androidapplecation.adapter.UserAdapter;
 import com.example.androidapplecation.repository.BoardRepository;
 import com.example.androidapplecation.R;
-import com.example.androidapplecation.repository.QuestionRepository;
+// import com.example.androidapplecation.repository.QuestionRepository;
 import com.example.androidapplecation.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class DashboardActivity extends BaseActivity {
 
         // 로그
         BoardRepository.getInstance().logAllBoards();
-        QuestionRepository.getInstance().logAllQuestion();
+        // QuestionRepository.getInstance().logAllQuestion();
     }
 
     // 뷰 초기화 메서드
@@ -106,12 +106,6 @@ public class DashboardActivity extends BaseActivity {
         // UserRepository에서 사용자 목록 가져오기 및 어댑터 설정
         userAdapter = new UserAdapter(UserRepository.getInstance().getUserList());
         mentorInfoView.setAdapter(userAdapter);
-
-        // QuestionAdapter 초기화
-        // questionAdapter = new QuestionAdapter(QuestionRepository.getInstance().getQuestionList());
-        questionAdapter = new QuestionAdapter(QuestionRepository.getInstance().getQuestionList() != null ?
-                QuestionRepository.getInstance().getQuestionList() :
-                new ArrayList<>());
         questionRecyclerView.setAdapter(questionAdapter);
     }
 
