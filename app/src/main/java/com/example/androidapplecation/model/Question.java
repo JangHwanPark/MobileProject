@@ -7,8 +7,7 @@ public class Question {
     private int uid;
     private String title;
     private String content;
-    // private String author;
-    private String questionId;  // 관련 질문 ID
+    private String category;  // 관련 질문 ID
     private Date createdAt;
     private Date updatedAt;
 
@@ -18,8 +17,7 @@ public class Question {
             int uid,
             String title,
             String content,
-            // String author,
-            String questionId,
+            String category,
             Date createdAt,
             Date updatedAt
     ) {
@@ -27,8 +25,7 @@ public class Question {
         this.uid = uid;
         this.title = title;
         this.content = content;
-        // this.author = author;
-        this.questionId = questionId;
+        this.category = category;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -66,12 +63,12 @@ public class Question {
         this.content = content;
     }
 
-    public String getQuestionId() {
-        return questionId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setQuestionId(String questionId) {
-        this.questionId = questionId;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public Date getCreatedAt() {

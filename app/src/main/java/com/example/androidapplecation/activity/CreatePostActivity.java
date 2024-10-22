@@ -48,12 +48,12 @@ public class CreatePostActivity extends BaseActivity {
                 this, R.array.post_categories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
+        Log.d(TAG, "categorySpinner: " + String.valueOf(categorySpinner));
 
         // 체크 버튼 설정
         submitButton = findViewById(R.id.header_btn_check);
         submitButton.setVisibility(View.VISIBLE);
         submitButton.setOnClickListener(v -> {
-            // String author =
             String title = titleEditText.getText().toString();
             String content = contentEditText.getText().toString();
             String category = categorySpinner.getSelectedItem().toString();  // 선택된 카테고리 가져오기
