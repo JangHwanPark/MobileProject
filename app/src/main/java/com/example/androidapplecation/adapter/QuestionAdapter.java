@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
 
-    private ArrayList<Question> questionList;
+    private final ArrayList<Question> questionList;
 
     // Constructor
     public QuestionAdapter(ArrayList<Question> questionList) {

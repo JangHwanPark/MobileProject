@@ -14,12 +14,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidapplecation.adapter.BoardAdapter;
 import com.example.androidapplecation.adapter.QuestionAdapter;
 import com.example.androidapplecation.adapter.UserAdapter;
+import com.example.androidapplecation.model.Question;
+import com.example.androidapplecation.network.ApiService;
+import com.example.androidapplecation.network.RetrofitClient;
 import com.example.androidapplecation.repository.BoardRepository;
 import com.example.androidapplecation.R;
-// import com.example.androidapplecation.repository.QuestionRepository;
 import com.example.androidapplecation.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class DashboardActivity extends BaseActivity {
     private static final String TAG = "DashboardActivity";  // 로그 태그
@@ -62,6 +70,9 @@ public class DashboardActivity extends BaseActivity {
         initializeAdapters();
         initializeFooterButtons();
 
+        // 서버에서 데이터 호출
+        loadQuestions();
+
         // 기본적으로 타임라인(RecyclerView)를 출력
         showRecyclerView();
 
@@ -73,7 +84,36 @@ public class DashboardActivity extends BaseActivity {
 
         // 로그
         BoardRepository.getInstance().logAllBoards();
-        // QuestionRepository.getInstance().logAllQuestion();
+    }
+
+    private void loadQuestions() {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // 서버에서 질문 데이터를 가져옴
+        Call<List<Question>> call = apiService.getCategoryQuestion();
+        call.enqueue(new Callback<List<Question>>() {
+            @Override
+            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Question> questions = response.body();
+                    // 필요시 ArrayList로 변환
+                    ArrayList<Question> questionArrayList = new ArrayList<>(questions);
+
+                    // 질문 데이터를 어댑터에 설정
+                    questionAdapter = new QuestionAdapter(questionArrayList);
+                    questionRecyclerView.setAdapter(questionAdapter);
+                    questionAdapter.notifyDataSetChanged();
+                    Log.d(TAG, "질문 데이터를 성공적으로 가져왔습니다.");
+                } else {
+                    Log.e(TAG, "질문 데이터를 가져오지 못했습니다.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Question>> call, Throwable t) {
+                Log.e(TAG, "서버 통신 오류: " + t.getMessage());
+            }
+        });
     }
 
     // 뷰 초기화 메서드
