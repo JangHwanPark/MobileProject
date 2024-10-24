@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Header Component (이미 정의된 컴포넌트를 불러오기) -->
     <include
         android:id="@+id/component_header"
         layout="@layout/component_header"
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- 제목을 표시할 TextView -->
     <TextView
@@ -38,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
     <!-- 내용을 표시할 TextView -->
     <TextView
@@ -50,7 +49,64 @@
         app:layout_constraintTop_toBottomOf="@id/textViewAuthorAndDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/commentSection"
+        android:layout_marginTop="16dp" />
+
+    <!-- 댓글 섹션 -->
+    <LinearLayout
+        android:id="@+id/commentSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <!-- 댓글 입력창 -->
+        <EditText
+            android:id="@+id/editTextComment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="댓글을 입력하세요"
+            android:layout_weight="1"
+            android:padding="10dp" />
+
+        <!-- 댓글 전송 버튼 -->
+        <Button
+            android:id="@+id/buttonSendComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전송"
+            android:padding="10dp"
+            android:background="@drawable/button_background"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <!-- 댓글이 없을 때 표시될 TextView -->
+    <TextView
+        android:id="@+id/textViewNoComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="댓글이 없습니다."
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/textViewContent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"/>
+
+    <!-- 댓글을 표시할 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewComments"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewNoComments"
+        app:layout_constraintBottom_toTopOf="@id/commentSection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
