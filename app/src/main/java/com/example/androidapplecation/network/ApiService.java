@@ -24,4 +24,8 @@ public interface ApiService {
 
     @GET("/get/category/free-board")
     Call<List<Question>> getCategoryFreeBoard();
+
+    // 로그인
+    @POST("/api/login")
+    Call<User> loginUser(@Body User user);
 }

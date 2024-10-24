@@ -10,12 +10,16 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.androidapplecation.R;
-import com.example.androidapplecation.repository.UserRepository;
 import com.example.androidapplecation.model.User;
+import com.example.androidapplecation.network.ApiService;
+import com.example.androidapplecation.network.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends BaseActivity {
 
-    private Button btnSubmit;
     private EditText editTextEmail, editTextPassword;
 
     @Override
@@ -31,7 +35,7 @@ public class LoginActivity extends BaseActivity {
         setupUndoButton();
 
         // 버튼 초기화
-        btnSubmit = findViewById(R.id.loginbutton);
+        Button btnSubmit = findViewById(R.id.loginbutton);
 
         // 버튼 클릭 리스너 설정
         btnSubmit.setOnClickListener(v -> {
@@ -48,31 +52,8 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
 
-            // UserRepository에서 이메일로 유저를 검색
-            User user = UserRepository.getInstance().findUserByEmail(email);
-
-            if (user != null && user.getPassword().equals(password)) {
-                // 로그인 성공
-                Toast.makeText(
-                        LoginActivity.this,
-                        "로그인 성공!",
-                        Toast.LENGTH_SHORT
-                ).show();
-
-                // DashboardActivity로 이동
-                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                startActivity(intent);
-
-                // 로그인 액티비티 종료
-                finish();
-            } else {
-                // 로그인 실패
-                Toast.makeText(
-                        LoginActivity.this,
-                        "이메일 또는 비밀번호가 일치하지 않습니다.",
-                        Toast.LENGTH_SHORT
-                ).show();
-            }
+            // 서버로 로그인 요청 보내기
+            loginUser(email, password);
         });
 
         // 회원가입 TextView 클릭 리스너 설정
@@ -83,6 +64,55 @@ public class LoginActivity extends BaseActivity {
                     LoginActivity.this,
                     RegisterActivity.class);
             startActivity(intent);
+        });
+    }
+
+    // 로그인 요청 처리 메서드
+    private void loginUser(String email, String password) {
+        // ApiService 생성
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        // 새로운 User 객체 생성
+        User user = new User(email, password);
+
+        // 로그인 요청
+        Call<User> call = apiService.loginUser(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    // 로그인 성공
+                    Toast.makeText(
+                            LoginActivity.this,
+                            "로그인 성공!",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+                    // DashboardActivity로 이동
+                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    startActivity(intent);
+
+                    // 로그인 액티비티 종료
+                    finish();
+                } else {
+                    // 로그인 실패
+                    Toast.makeText(
+                            LoginActivity.this,
+                            "이메일 또는 비밀번호가 일치하지 않습니다.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                // 네트워크 오류 처리
+                Toast.makeText(
+                        LoginActivity.this,
+                        "서버와의 통신에 실패했습니다.",
+                        Toast.LENGTH_SHORT
+                ).show();
+            }
         });
     }
 }
