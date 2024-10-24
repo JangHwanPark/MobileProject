@@ -97,6 +97,17 @@ public class DashboardActivity extends BaseActivity {
 
                     // 질문 데이터를 어댑터에 설정
                     questionAdapter = new QuestionAdapter(questionArrayList);
+
+                    // 게시글 클릭 리스너 설정
+                    questionAdapter.setOnItemClickListener(question -> {
+                        // 클릭된 게시글 정보를 Intent로 전달하여 상세 페이지로 이동
+                        Intent intent = new Intent(DashboardActivity.this, QuestionDetailActivity.class);
+                        intent.putExtra("category", question.getCategory());
+                        intent.putExtra("title", question.getTitle());
+                        intent.putExtra("content", question.getContent());
+                        startActivity(intent);
+                    });
+
                     questionRecyclerView.setAdapter(questionAdapter);
                     questionAdapter.notifyDataSetChanged();
                     Log.d(TAG, "질문 데이터를 성공적으로 가져왔습니다.");

@@ -16,10 +16,21 @@ import java.util.ArrayList;
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
 
     private final ArrayList<Question> questionList;
+    private OnItemClickListener onItemClickListener;
 
-    // Constructor
+    // 인터페이스 정의
+    public interface OnItemClickListener {
+        void onItemClick(Question question);
+    }
+
+    // 생성자
     public QuestionAdapter(ArrayList<Question> questionList) {
         this.questionList = questionList;
+    }
+
+    // 클릭 리스너 설정 메서드
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 
     @NonNull
@@ -44,6 +55,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         holder.dateTextView.setText(question.getCreatedAt() != null
                 ? question.getCreatedAt().toString()
                 : "날짜 없음");
+
+        // 아이템 클릭 이벤트 설정
+        holder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(question); // 클릭된 질문 객체 전달
+            }
+        });
     }
 
     @Override
@@ -64,5 +82,4 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             dateTextView = itemView.findViewById(R.id.question_date);  // XML과 동일한 ID인지 확인
         }
     }
-
 }
