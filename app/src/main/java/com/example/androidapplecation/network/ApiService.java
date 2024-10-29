@@ -29,6 +29,9 @@ public interface ApiService {
     @GET("/get/category/free-board")
     Call<List<Question>> getCategoryFreeBoard();
 
+    @GET("/get/user/list")
+    Call<List<Question>> getUserList();
+
     // 로그인
     @POST("/api/login")
     Call<LoginResponse> loginUser(@Body Map<String, String> user);

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidapplecation.adapter.QuestionAdapter;
 import com.example.androidapplecation.model.Question;
+import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.network.ApiService;
 import com.example.androidapplecation.network.RetrofitClient;
 import com.example.androidapplecation.R;
@@ -26,8 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardActivity extends BaseActivity {
-    private QuestionAdapter questionAdapter;
-    private QuestionAdapter freeBoardAdapter;
+    private QuestionAdapter questionAdapter, freeBoardAdapter, userAdapter;
     private RecyclerView recyclerView, mentorInfoView, questionRecyclerView;
     private Button timelineTab, questionTab, mentorTab;
     private ImageButton homeButton, createPostButton, accountButton;
@@ -42,12 +42,14 @@ public class DashboardActivity extends BaseActivity {
         // 어댑터 초기화 시 Context 전달
         questionAdapter = new QuestionAdapter(new ArrayList<>(), this);
         freeBoardAdapter = new QuestionAdapter(new ArrayList<>(), this);
+        userAdapter = new QuestionAdapter(new ArrayList<>(), this);
 
         questionRecyclerView.setAdapter(questionAdapter);
         recyclerView.setAdapter(freeBoardAdapter);
 
         loadQuestions();
         loadFreeBoard();
+        loadSelectUser();
     }
 
     private void loadQuestions() {
@@ -94,6 +96,12 @@ public class DashboardActivity extends BaseActivity {
                 Log.e(TAG, "서버 통신 오류: " + t.getMessage());
             }
         });
+    }
+
+    private void loadSelectUser() {
+        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
+
+        Call<List<User>> callUserData = apiService.getUserList();
     }
 
     private void initializeViews() {
