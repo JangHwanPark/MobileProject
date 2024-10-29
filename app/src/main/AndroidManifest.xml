@@ -28,7 +28,7 @@
         <activity android:name=".activity.DashboardActivity" />
         <activity android:name=".activity.CreatePostActivity" />
         <activity android:name=".activity.UserAccountActivity" />
-        <activity android:name=".activity.QuestionDetailActivity" />
+        <activity android:name=".activity.PostDetailActivity" />
     </application>
 
 </manifest>

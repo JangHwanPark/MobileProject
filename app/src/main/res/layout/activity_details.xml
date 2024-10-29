@@ -52,6 +52,18 @@
         app:layout_constraintBottom_toTopOf="@id/commentSection"
         android:layout_marginTop="16dp" />
 
+    <TextView
+        android:id="@+id/textQid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/textViewAuthorAndDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/commentSection"
+        android:layout_marginTop="16dp" />
+
     <!-- 댓글 섹션 -->
     <LinearLayout
         android:id="@+id/commentSection"

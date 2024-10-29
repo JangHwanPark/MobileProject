@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,8 +39,9 @@ public class DashboardActivity extends BaseActivity {
 
         initializeViews();
 
-        questionAdapter = new QuestionAdapter(new ArrayList<>());
-        freeBoardAdapter = new QuestionAdapter(new ArrayList<>());
+        // 어댑터 초기화 시 Context 전달
+        questionAdapter = new QuestionAdapter(new ArrayList<>(), this);
+        freeBoardAdapter = new QuestionAdapter(new ArrayList<>(), this);
 
         questionRecyclerView.setAdapter(questionAdapter);
         recyclerView.setAdapter(freeBoardAdapter);
