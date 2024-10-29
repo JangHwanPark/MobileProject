@@ -1,18 +1,19 @@
 package com.example.androidapplecation.activity;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androidapplecation.adapter.QuestionAdapter;
 import com.example.androidapplecation.model.Question;
 import com.example.androidapplecation.network.ApiService;
 import com.example.androidapplecation.network.RetrofitClient;
@@ -25,9 +26,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class DashboardActivity extends BaseActivity {
-    private static final String TAG = "DashboardActivity";  // 로그 태그
+    private QuestionAdapter questionAdapter;
+    private QuestionAdapter freeBoardAdapter;
     private RecyclerView recyclerView, mentorInfoView, questionRecyclerView;
     private Button timelineTab, questionTab, mentorTab;
     private ImageButton homeButton, createPostButton, accountButton;
@@ -37,55 +38,28 @@ public class DashboardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // SearchView 초기화
-        SearchView searchView = findViewById(R.id.search_view);
-
-        // SearchView 리스너 설정
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // 사용자가 검색어를 제출했을 때
-                Log.d(TAG, "검색어 제출: " + query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // 검색어 입력이 변경될 때
-                Log.d(TAG, "검색어 입력 중: " + newText);
-                return false;
-            }
-        });
-
-        // 초기화 메서드 호출
         initializeViews();
-        initializeFooterButtons();
 
-        // 서버에서 데이터 호출
+        questionAdapter = new QuestionAdapter(new ArrayList<>());
+        freeBoardAdapter = new QuestionAdapter(new ArrayList<>());
+
+        questionRecyclerView.setAdapter(questionAdapter);
+        recyclerView.setAdapter(freeBoardAdapter);
+
         loadQuestions();
         loadFreeBoard();
-
-        // 탭 버튼 리스너 설정
-        setupTabListeners();
-
-        // 하단 네비게이션 바의 버튼 리스너 설정
-        setupFooterButtonListeners();
     }
 
     private void loadQuestions() {
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
-        // 서버에서 질문 데이터를 가져옴
         Call<List<Question>> callQuestionData = apiService.getCategoryQuestion();
         callQuestionData.enqueue(new Callback<List<Question>>() {
             @Override
-            public void onResponse(
-                    @NonNull Call<List<Question>> call,
-                    @NonNull Response<List<Question>> response) {
+            public void onResponse(@NonNull Call<List<Question>> call, @NonNull Response<List<Question>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Question> questions = response.body();
-                    ArrayList<Question> questionArrayList = new ArrayList<>(questions);
-
+                    questionAdapter.updateQuestions(questions);
                     Log.d(TAG, "질문 데이터를 성공적으로 가져왔습니다.");
                 } else {
                     Log.e(TAG, "질문 데이터를 가져오지 못했습니다.");
@@ -93,7 +67,7 @@ public class DashboardActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Question>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
                 Log.e(TAG, "서버 통신 오류: " + t.getMessage());
             }
         });
@@ -102,34 +76,27 @@ public class DashboardActivity extends BaseActivity {
     private void loadFreeBoard() {
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
-        // 서버에서 자유게시판 데이터를 가져옴
         Call<List<Question>> callFreeBoardData = apiService.getCategoryFreeBoard();
         callFreeBoardData.enqueue(new Callback<List<Question>>() {
             @Override
-            public void onResponse(
-                    @NonNull Call<List<Question>> call,
-                    @NonNull Response<List<Question>> response) {
+            public void onResponse(@NonNull Call<List<Question>> call, @NonNull Response<List<Question>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Question> questions = response.body();
-                    ArrayList<Question> freeBoardList = new ArrayList<>(questions);
-
+                    freeBoardAdapter.updateQuestions(questions);
                     Log.d(TAG, "자유게시판 데이터를 성공적으로 가져왔습니다.");
                 } else {
                     Log.e(TAG, "자유게시판 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
                 }
             }
 
-
             @Override
-            public void onFailure(Call<List<Question>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
                 Log.e(TAG, "서버 통신 오류: " + t.getMessage());
             }
         });
     }
 
-    // 뷰 초기화 메서드
     private void initializeViews() {
-        // init Recycler View
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -139,59 +106,41 @@ public class DashboardActivity extends BaseActivity {
         questionRecyclerView = findViewById(R.id.recycler_question);
         questionRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // init components
         timelineTab = findViewById(R.id.timeline_tab);
         questionTab = findViewById(R.id.question_tab);
         mentorTab = findViewById(R.id.mentor_tab);
         homeButton = findViewById(R.id.footer_home);
         createPostButton = findViewById(R.id.post_add);
         accountButton = findViewById(R.id.footer_account);
+
+        setupTabListeners();
+        setupFooterButtonListeners();
     }
 
-    // 하단 버튼(글 작성, 사용자 정보 등) 초기화
-    private void initializeFooterButtons() {
-        createPostButton.setOnClickListener(v -> {
-            Intent intent = new Intent(
-                    DashboardActivity.this,
-                    CreatePostActivity.class);
-            startActivity(intent);
-        });
-
-        accountButton.setOnClickListener(v -> {
-            Intent intent = new Intent(
-                    DashboardActivity.this,
-                    UserAccountActivity.class);
-            startActivity(intent);
-        });
-    }
-
-    // 탭 버튼 리스너 설정
     private void setupTabListeners() {
         timelineTab.setOnClickListener(v -> showRecyclerView());
         questionTab.setOnClickListener(v -> showQuestionView());
         mentorTab.setOnClickListener(v -> showMentorView());
     }
 
-    // 하단 네비게이션 바 버튼 리스너 설정
     private void setupFooterButtonListeners() {
         homeButton.setOnClickListener(v -> showRecyclerView());
+        createPostButton.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, CreatePostActivity.class)));
+        accountButton.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, UserAccountActivity.class)));
     }
 
-    // RecyclerView를 보여주는 메서드
     private void showRecyclerView() {
         recyclerView.setVisibility(View.VISIBLE);
         questionRecyclerView.setVisibility(View.GONE);
         mentorInfoView.setVisibility(View.GONE);
     }
 
-    // 질문답변 TextView를 보여주는 메서드
     private void showQuestionView() {
         recyclerView.setVisibility(View.GONE);
         questionRecyclerView.setVisibility(View.VISIBLE);
         mentorInfoView.setVisibility(View.GONE);
     }
 
-    // 멘토찾기 RecyclerView를 보여주는 메서드
     private void showMentorView() {
         recyclerView.setVisibility(View.GONE);
         questionRecyclerView.setVisibility(View.GONE);
