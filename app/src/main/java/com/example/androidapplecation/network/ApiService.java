@@ -30,7 +30,7 @@ public interface ApiService {
     Call<List<Question>> getCategoryFreeBoard();
 
     @GET("/get/user/list")
-    Call<List<Question>> getUserList();
+    Call<List<User>> getUserList();
 
     // 로그인
     @POST("/api/login")

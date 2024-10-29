@@ -102,6 +102,23 @@ public class DashboardActivity extends BaseActivity {
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
         Call<List<User>> callUserData = apiService.getUserList();
+        callUserData.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<User> users = response.body();
+                    freeBoardAdapter.updateQuestions(users);
+                    Log.d(TAG, "자유게시판 데이터를 성공적으로 가져왔습니다.");
+                } else {
+                    Log.e(TAG, "자유게시판 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void initializeViews() {

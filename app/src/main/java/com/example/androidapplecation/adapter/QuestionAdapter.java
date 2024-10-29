@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidapplecation.R;
 import com.example.androidapplecation.activity.PostDetailActivity;
 import com.example.androidapplecation.model.Question;
+import com.example.androidapplecation.model.User;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         return questionList.size();
     }
 
-    public void updateQuestions(List<Question> newQuestions) {
+    public void updateQuestions(List<User> newQuestions) {
         questionList.clear();
         questionList.addAll(newQuestions);
         notifyDataSetChanged();
