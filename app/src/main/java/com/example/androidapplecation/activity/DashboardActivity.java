@@ -13,14 +13,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androidapplecation.adapter.QuestionAdapter;
-import com.example.androidapplecation.adapter.UserAdapter;
 import com.example.androidapplecation.model.Question;
 import com.example.androidapplecation.network.ApiService;
 import com.example.androidapplecation.network.RetrofitClient;
-import com.example.androidapplecation.repository.BoardRepository;
 import com.example.androidapplecation.R;
-import com.example.androidapplecation.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +31,6 @@ public class DashboardActivity extends BaseActivity {
     private RecyclerView recyclerView, mentorInfoView, questionRecyclerView;
     private Button timelineTab, questionTab, mentorTab;
     private ImageButton homeButton, createPostButton, accountButton;
-    private QuestionAdapter questionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +59,6 @@ public class DashboardActivity extends BaseActivity {
 
         // 초기화 메서드 호출
         initializeViews();
-        initializeAdapters();
         initializeFooterButtons();
 
         // 서버에서 데이터 호출
@@ -76,9 +70,6 @@ public class DashboardActivity extends BaseActivity {
 
         // 하단 네비게이션 바의 버튼 리스너 설정
         setupFooterButtonListeners();
-
-        // 로그
-        BoardRepository.getInstance().logAllBoards();
     }
 
     private void loadQuestions() {
@@ -95,21 +86,6 @@ public class DashboardActivity extends BaseActivity {
                     List<Question> questions = response.body();
                     ArrayList<Question> questionArrayList = new ArrayList<>(questions);
 
-                    // 질문 데이터를 어댑터에 설정
-                    questionAdapter = new QuestionAdapter(questionArrayList);
-
-                    // 게시글 클릭 리스너 설정
-                    questionAdapter.setOnItemClickListener(question -> {
-                        // 클릭된 게시글 정보를 Intent로 전달하여 상세 페이지로 이동
-                        Intent intent = new Intent(DashboardActivity.this, QuestionDetailActivity.class);
-                        intent.putExtra("category", question.getCategory());
-                        intent.putExtra("title", question.getTitle());
-                        intent.putExtra("content", question.getContent());
-                        startActivity(intent);
-                    });
-
-                    questionRecyclerView.setAdapter(questionAdapter);
-                    questionAdapter.notifyDataSetChanged();
                     Log.d(TAG, "질문 데이터를 성공적으로 가져왔습니다.");
                 } else {
                     Log.e(TAG, "질문 데이터를 가져오지 못했습니다.");
@@ -137,9 +113,6 @@ public class DashboardActivity extends BaseActivity {
                     List<Question> questions = response.body();
                     ArrayList<Question> freeBoardList = new ArrayList<>(questions);
 
-                    questionAdapter = new QuestionAdapter(freeBoardList);
-                    recyclerView.setAdapter(questionAdapter);
-                    questionAdapter.notifyDataSetChanged();
                     Log.d(TAG, "자유게시판 데이터를 성공적으로 가져왔습니다.");
                 } else {
                     Log.e(TAG, "자유게시판 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
@@ -173,14 +146,6 @@ public class DashboardActivity extends BaseActivity {
         homeButton = findViewById(R.id.footer_home);
         createPostButton = findViewById(R.id.post_add);
         accountButton = findViewById(R.id.footer_account);
-    }
-
-    // 어댑터 초기화 메서드
-    private void initializeAdapters() {
-        // UserRepository에서 사용자 목록 가져오기 및 어댑터 설정
-        UserAdapter userAdapter = new UserAdapter(UserRepository.getInstance().getUserList());
-        mentorInfoView.setAdapter(userAdapter);
-        questionRecyclerView.setAdapter(questionAdapter);
     }
 
     // 하단 버튼(글 작성, 사용자 정보 등) 초기화

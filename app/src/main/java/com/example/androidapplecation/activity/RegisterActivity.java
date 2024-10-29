@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 
 import com.example.androidapplecation.network.ApiService;
 import com.example.androidapplecation.network.RetrofitClient;
-import com.example.androidapplecation.repository.UserRepository;
 import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.util.FormValidation;
 import com.example.androidapplecation.R;
@@ -77,7 +76,6 @@ public class RegisterActivity extends BaseActivity {
         // 새로운 User 객체 생성 및 UserRepository에 저장
         User newUser = new User(email, password, name, birth);
         Call<Void> callUser = apiService.registerUser(newUser);
-        UserRepository.getInstance().addUser(newUser);  // 싱글톤에 저장
 
         // 네트워크 요청 비동기 처리
         callUser.enqueue(new retrofit2.Callback<Void>() {
