@@ -2,6 +2,7 @@ package com.example.androidapplecation.activity;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -60,19 +61,10 @@ public class CreatePostActivity extends BaseActivity {
 
             if (category.equals("질문하기") || category.equals("자유 게시판")) {
                 // Question 객체 생성
-                Question newQuestion = new Question(null, 1, title, content, category, new Date(), new Date());
-
+                Question newQuestion = new Question(null, -1, title, content, category, new Date(), new Date());
                 // Retrofit으로 POST 요청 보내기
                 sendQuestionToServer(newQuestion);
-
-            } /*else if (category.equals("자유 게시판")) {
-                // 자유 게시판 로직 처리
-                // Question 객체 생성
-                Question newQuestion = new Question(null, 1, title, content, category, new Date(), new Date());
-
-                // Retrofit으로 POST 요청 보내기
-                sendQuestionToServer(newQuestion);
-            }*/
+            }
 
             // 액티비티 종료 후 이전화면으로 돌아가기
             finish();
@@ -83,8 +75,16 @@ public class CreatePostActivity extends BaseActivity {
         // Retrofit 클라이언트 생성
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String token = sharedPreferences.getString("token", null);
+
+        if (token == null) {
+            Toast.makeText(this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // 질문을 서버로 전송
-        Call<Void> call = apiService.saveQuestion(question);
+        Call<Void> call = apiService.saveQuestion(token, question);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
@@ -106,7 +106,7 @@ public class CreatePostActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 // 네트워크 오류 처리
                 Toast.makeText(
                         CreatePostActivity.this,

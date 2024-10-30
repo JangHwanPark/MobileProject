@@ -16,37 +16,39 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiService {
-    // (회원가입) 사용자 계정을 서버에 저장하는 POST 요청
-    @POST("/post/user/register")
-    Call<Void> registerUser(@Body User user);
+    // Question
+    @POST("/api/v1/question/post/save")
+    Call<Void> saveQuestion(@Header("Authorization") String token, @Body Question question);
 
-    // 질문을 서버에 저장하는 POST 요청
-    @POST("/post/question/save")
-    Call<Void> saveQuestion(@Body Question question);
-
-    // 질문과 자유게시판을 서버에서 가져오는 GET 요청
-    @GET("/get/category/question")
+    @GET("/api/v1/question/get/category/question")
     Call<List<Question>> getCategoryQuestion();
 
-    @GET("/get/category/free-board")
+    @GET("/api/v1/question/get/category/free-board")
     Call<List<Question>> getCategoryFreeBoard();
 
-    @GET("/api/get/users")
+    // Comment
+    @POST("/api/v1/comment/post/create")
+    Call<Void> createComment(@Body Comment comment);
+
+    @POST("/api/v1/comment/post/update/id")
+    Call<Void> updateComment(@Path("cid") int commentId, @Body Comment comment);
+
+    @POST("/api/v1/comment/post/delete/id")
+    Call<Void> deleteComment(@Path("cid") int commentId);
+
+    // User
+    @GET("/api/v1/user/get/info")
+    Call<ResWrapper<User>> getUserInfo(@Header("Authorization") String token);
+
+    @POST("/api/v1/user/post/register")
+    Call<Void> registerUser(@Body User user);
+
+    @GET("/api/v1/user/api/get/select-all")
     Call<List<User>> getAllUsers();
 
     // 로그인
     @POST("/api/login")
     Call<LoginResponse> loginUser(@Body Map<String, String> user);
 
-    @POST("/post/comment/create")
-    Call<Void> createComment(@Body Comment comment);
-
-    @POST("/post/comment/update/{commentId}")
-    Call<Void> updateComment(@Path("cid") int commentId, @Body Comment comment);
-
-    @POST("/post/comment/delete/{commentId}")
-    Call<Void> deleteComment(@Path("cid") int commentId);
-
-    @GET("/api/v1/user/get/info")
-    Call<ResWrapper<User>> getUserInfo(@Header("Authorization") String token);
+    // Answer
 }

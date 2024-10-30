@@ -3,7 +3,6 @@ package com.example.androidapplecation.model;
 public class User {
     private int uid;
     private int rid;
-    private String udid;
     private String email;
     private String password;
     private String name;
@@ -14,7 +13,6 @@ public class User {
     public User(
             int uid,
             int rid,
-            String udid,
             String email,
             String password,
             String name,
@@ -24,7 +22,6 @@ public class User {
     ) {
         this.uid = uid;
         this.rid = rid;
-        this.udid = udid;
         this.email = email;
         this.password = password;
         this.name = name;
@@ -55,14 +52,6 @@ public class User {
 
     public void setRid(int rid) {
         this.rid = rid;
-    }
-
-    public String getUdid() {
-        return udid;
-    }
-
-    public void setUdid(String udid) {
-        this.udid = udid;
     }
 
     public String getEmail() {

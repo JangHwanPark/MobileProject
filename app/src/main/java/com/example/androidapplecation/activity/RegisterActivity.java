@@ -102,7 +102,7 @@ public class RegisterActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 // 네트워크 오류 또는 서버와의 통신 실패
                 Toast.makeText(RegisterActivity.this, "서버와의 통신에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "서버 통신 오류: " + t.getMessage());
@@ -110,10 +110,7 @@ public class RegisterActivity extends BaseActivity {
         });
 
         // 회원가입 성공 메시지
-        Toast.makeText(
-                RegisterActivity.this,
-                "회원가입 성공!",
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(RegisterActivity.this, "회원가입 성공!", Toast.LENGTH_SHORT).show();
 
         // 로그 출력
         Log.d(TAG, "User registered: " + newUser.getEmail() + ", " + newUser.getName());
