@@ -10,6 +10,7 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -44,4 +45,10 @@ public interface ApiService {
 
     @POST("/post/comment/delete/{commentId}")
     Call<Void> deleteComment(@Path("cid") int commentId);
+
+    @GET("/get/user/info")
+    Call<User> getUserInfo(@Header("Authorization") String token);
+
+    @GET("/api/get/users")
+    Call<List<User>> getAllUsers();
 }

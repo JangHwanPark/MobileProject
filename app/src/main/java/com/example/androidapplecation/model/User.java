@@ -40,11 +40,6 @@ public class User {
         this.birth = birth;
     }
 
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
     // Getters and Setters
     public int getUid() {
         return uid;

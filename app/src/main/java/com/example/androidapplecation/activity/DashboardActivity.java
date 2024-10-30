@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidapplecation.adapter.QuestionAdapter;
+import com.example.androidapplecation.adapter.UserAdapter;
 import com.example.androidapplecation.model.Question;
 import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.network.ApiService;
@@ -27,7 +28,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardActivity extends BaseActivity {
-    private QuestionAdapter questionAdapter, freeBoardAdapter, userAdapter;
+    private QuestionAdapter questionAdapter, freeBoardAdapter;
+    private UserAdapter userAdapter;
     private RecyclerView recyclerView, mentorInfoView, questionRecyclerView;
     private Button timelineTab, questionTab, mentorTab;
     private ImageButton homeButton, createPostButton, accountButton;
@@ -42,10 +44,11 @@ public class DashboardActivity extends BaseActivity {
         // 어댑터 초기화 시 Context 전달
         questionAdapter = new QuestionAdapter(new ArrayList<>(), this);
         freeBoardAdapter = new QuestionAdapter(new ArrayList<>(), this);
-        userAdapter = new QuestionAdapter(new ArrayList<>(), this);
+        userAdapter = new UserAdapter(new ArrayList<>(), this);
 
         questionRecyclerView.setAdapter(questionAdapter);
         recyclerView.setAdapter(freeBoardAdapter);
+        mentorInfoView.setAdapter(userAdapter);
 
         loadQuestions();
         loadFreeBoard();
@@ -101,22 +104,24 @@ public class DashboardActivity extends BaseActivity {
     private void loadSelectUser() {
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
-        Call<List<User>> callUserData = apiService.getUserList();
+        Call<List<User>> callUserData = apiService.getAllUsers();
         callUserData.enqueue(new Callback<List<User>>() {
             @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+            public void onResponse(
+                    @NonNull Call<List<User>> call,
+                    @NonNull Response<List<User>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<User> users = response.body();
-                    freeBoardAdapter.updateQuestions(users);
-                    Log.d(TAG, "자유게시판 데이터를 성공적으로 가져왔습니다.");
+                    userAdapter.updateUsers(users); // 데이터를 업데이트하고 UI를 갱신합니다.
+                    Log.d(TAG, "사용자 데이터를 성공적으로 가져왔습니다.");
                 } else {
-                    Log.e(TAG, "자유게시판 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
+                    Log.e(TAG, "사용자 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-
+            public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
+                Log.e(TAG, "서버 통신 오류: " + t.getMessage());
             }
         });
     }

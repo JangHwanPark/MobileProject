@@ -2,6 +2,7 @@ package com.example.androidapplecation.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             intent.putExtra("qid", question.getId());  // question ID 전달
             intent.putExtra("title", question.getTitle()); // 제목 전달
             intent.putExtra("content", question.getContent()); // 내용 전달
+            Log.d("question", String.valueOf(intent));
             context.startActivity(intent);
         });
     }
@@ -52,7 +54,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         return questionList.size();
     }
 
-    public void updateQuestions(List<User> newQuestions) {
+    public void updateQuestions(List<Question> newQuestions) {
         questionList.clear();
         questionList.addAll(newQuestions);
         notifyDataSetChanged();
