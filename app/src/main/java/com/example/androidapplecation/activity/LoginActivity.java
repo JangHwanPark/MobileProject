@@ -1,8 +1,11 @@
 package com.example.androidapplecation.activity;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
@@ -88,12 +91,14 @@ public class LoginActivity extends BaseActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     // 로그인 성공
                     String token = response.body().getData(); // JWT 토큰 추출
+                    Log.d(TAG, "토큰 : token : " + token);
 
                     // SharedPreferences에 토큰 저장
                     SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("token", token); // 토큰 저장
                     editor.apply();
+                    Log.d(TAG, "저장된 토큰 (sharedPreferences) : " + sharedPreferences);
 
                     Toast.makeText(LoginActivity.this, "로그인 성공!", Toast.LENGTH_SHORT).show();
 

@@ -3,6 +3,7 @@ package com.example.androidapplecation.activity;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,8 +39,11 @@ public class DashboardActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         initializeViews();
+
+        // 저장된 토큰을 가져와서 로그로 출력
+        String token = getTokenFromPreferences();
+        Log.d(TAG, "저장된 토큰: " + token); // 토큰 출력
 
         // 어댑터 초기화 시 Context 전달
         questionAdapter = new QuestionAdapter(new ArrayList<>(), this);
@@ -175,5 +179,10 @@ public class DashboardActivity extends BaseActivity {
         recyclerView.setVisibility(View.GONE);
         questionRecyclerView.setVisibility(View.GONE);
         mentorInfoView.setVisibility(View.VISIBLE);
+    }
+
+    private String getTokenFromPreferences() {
+        SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        return prefs.getString("token", null); // 저장된 토큰을 반환, 없으면 null 반환
     }
 }

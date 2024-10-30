@@ -3,6 +3,7 @@ import com.example.androidapplecation.model.LoginResponse;
 import com.example.androidapplecation.model.Question;
 import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.model.Comment;
+import com.example.androidapplecation.wrapper.ResWrapper;
 
 import java.util.List;
 import java.util.Map;
@@ -30,8 +31,8 @@ public interface ApiService {
     @GET("/get/category/free-board")
     Call<List<Question>> getCategoryFreeBoard();
 
-    @GET("/get/user/list")
-    Call<List<User>> getUserList();
+    @GET("/api/get/users")
+    Call<List<User>> getAllUsers();
 
     // 로그인
     @POST("/api/login")
@@ -46,9 +47,6 @@ public interface ApiService {
     @POST("/post/comment/delete/{commentId}")
     Call<Void> deleteComment(@Path("cid") int commentId);
 
-    @GET("/get/user/info")
-    Call<User> getUserInfo(@Header("Authorization") String token);
-
-    @GET("/api/get/users")
-    Call<List<User>> getAllUsers();
+    @GET("/api/v1/user/get/info")
+    Call<ResWrapper<User>> getUserInfo(@Header("Authorization") String token);
 }
