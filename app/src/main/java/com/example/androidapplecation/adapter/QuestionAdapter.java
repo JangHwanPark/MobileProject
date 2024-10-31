@@ -44,7 +44,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         // 사용자 정보 설정
         holder.questionAuthor.setText(question.getAuthor().getName()); // 작성자 이름 설정
         holder.questionUserCompany.setText(question.getAuthor().getCompany()); // 회사 설정
-        holder.questionDate.setText(question.getCreatedAt().toString());
+
+        // 날짜 포매팅
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        String formattedDate = dateFormat.format(question.getCreatedAt());
+        holder.questionDate.setText(formattedDate);
 
         // 아이템 클릭 이벤트
         holder.itemView.setOnClickListener(v -> {
