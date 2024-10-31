@@ -14,7 +14,9 @@ import com.example.androidapplecation.activity.PostDetailActivity;
 import com.example.androidapplecation.model.Question;
 import com.example.androidapplecation.model.User;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
     private final List<Question> questionList;
@@ -35,8 +37,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     @Override
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
         Question question = questionList.get(position);
+        // 제목 및 내용 설정
         holder.questionTitle.setText(question.getTitle());
         holder.questionContent.setText(question.getContent());
+
+        // 사용자 정보 설정
+        holder.questionAuthor.setText(question.getAuthor().getName()); // 작성자 이름 설정
+        holder.questionUserCompany.setText(question.getAuthor().getName()); // 회사 설정
+        holder.questionDate.setText(question.getCreatedAt().toString());
 
         // 아이템 클릭 이벤트
         holder.itemView.setOnClickListener(v -> {
@@ -64,11 +72,18 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
         TextView questionTitle;
         TextView questionContent;
+        TextView questionAuthor;
+        TextView questionUserCompany;
+        TextView questionDate;
 
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             questionTitle = itemView.findViewById(R.id.question_title);
             questionContent = itemView.findViewById(R.id.question_content);
+            questionAuthor = itemView.findViewById(R.id.question_author);          // 사용자 이름
+            questionUserCompany = itemView.findViewById(R.id.question_user_company); // 사용자 회사
+            questionDate = itemView.findViewById(R.id.question_date);                // 작성 날짜
         }
     }
+
 }

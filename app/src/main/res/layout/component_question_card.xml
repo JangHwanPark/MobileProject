@@ -18,7 +18,8 @@
             android:id="@+id/question_user_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_account"/>
 
         <!-- 사용자 텍스트 정보 -->
         <LinearLayout

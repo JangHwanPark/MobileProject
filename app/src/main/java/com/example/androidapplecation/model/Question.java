@@ -10,6 +10,8 @@ public class Question {
     private String category;  // 관련 질문 ID
     private Date createdAt;
     private Date updatedAt;
+    private User author;
+    private String company;
 
     // Constructor
     public Question(
@@ -86,4 +88,20 @@ public class Question {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    /*public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.author = company;
+    }*/
 }
