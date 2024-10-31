@@ -32,5 +32,23 @@
     <string-array name="post_interest">
         <item>프로그래밍</item>
         <item>인공지능</item>
+        <item>데이터베이스</item>
+        <item>네트워크</item>
+        <item>보안</item>
+        <item>웹 개발</item>
+        <item>모바일 개발</item>
+        <item>빅데이터</item>
+        <item>클라우드 컴퓨팅</item>
+        <item>사물인터넷(IoT)</item>
+        <item>블록체인</item>
+        <item>머신러닝</item>
+        <item>딥러닝</item>
+        <item>데이터 분석</item>
+        <item>컴퓨터 그래픽스</item>
+        <item>게임 개발</item>
+        <item>운영체제</item>
+        <item>소프트웨어 엔지니어링</item>
+        <item>자연어 처리(NLP)</item>
+        <item>로보틱스</item>
     </string-array>
 </resources>

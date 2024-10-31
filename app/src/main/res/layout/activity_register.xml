@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,13 +9,13 @@
 
     <!-- Header Component -->
     <include
-        layout="@layout/component_header"
         android:id="@+id/component_header"
+        layout="@layout/component_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Main Form Layout -->
     <LinearLayout
@@ -25,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:layout_marginBottom="70dp"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,9 +52,9 @@
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/edit_text"
                 android:hint="이메일을 입력하세요"
-                android:text="123@1.com"
                 android:inputType="textEmailAddress"
                 android:padding="8dp"
+                android:text="123@1.com"
                 android:textColor="@android:color/black" />
         </LinearLayout>
 
@@ -80,9 +79,9 @@
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/edit_text"
                 android:hint="비밀번호를 입력하세요"
-                android:text="123456"
                 android:inputType="textPassword"
                 android:padding="8dp"
+                android:text="123456"
                 android:textColor="@android:color/black" />
         </LinearLayout>
 
@@ -107,9 +106,9 @@
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/edit_text"
                 android:hint="이름을 입력하세요"
-                android:text="박장환"
                 android:inputType="textPersonName"
                 android:padding="8dp"
+                android:text="박장환"
                 android:textColor="@android:color/black" />
         </LinearLayout>
 
@@ -138,6 +137,22 @@
                 android:padding="8dp"
                 android:text="20240101"
                 android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+            <!-- 관심사 -->
+            <Spinner
+                android:id="@+id/interest_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/category_spinner" />
         </LinearLayout>
 
         <!-- Submit Button -->
