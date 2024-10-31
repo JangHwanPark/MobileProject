@@ -30,7 +30,6 @@ public class CreatePostActivity extends BaseActivity {
     private EditText titleEditText;
     private EditText contentEditText;
     private Spinner categorySpinner;
-    private Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +42,39 @@ public class CreatePostActivity extends BaseActivity {
 
         // Spinner 초기화
         categorySpinner = findViewById(R.id.category_spinner);
+        Spinner interestSpinner = findViewById(R.id.interest_spinner);
 
         // Spinner에 표시할 항목 설정
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
                 this, R.array.post_categories, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(adapter);
-        Log.d(TAG, "categorySpinner: " + String.valueOf(categorySpinner));
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryAdapter);
+
+        ArrayAdapter<CharSequence> interestAdapter = ArrayAdapter.createFromResource(
+                this, R.array.post_interest, android.R.layout.simple_spinner_item);
+        interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        interestSpinner.setAdapter(interestAdapter);
 
         // 체크 버튼 설정
-        submitButton = findViewById(R.id.header_btn_check);
+        Button submitButton = findViewById(R.id.header_btn_check);
         submitButton.setVisibility(View.VISIBLE);
-        submitButton.setOnClickListener(v -> {
-            String title = titleEditText.getText().toString();
-            String content = contentEditText.getText().toString();
-            String category = categorySpinner.getSelectedItem().toString();  // 선택된 카테고리 가져오기
+        submitButton.setOnClickListener(v -> handleClickSubmitButton());
+    }
 
-            if (category.equals("질문하기") || category.equals("자유 게시판")) {
-                // Question 객체 생성
-                Question newQuestion = new Question(null, -1, title, content, category, new Date(), new Date());
-                // Retrofit으로 POST 요청 보내기
-                sendQuestionToServer(newQuestion);
-            }
+    private void handleClickSubmitButton() {
+        String title = titleEditText.getText().toString();
+        String content = contentEditText.getText().toString();
+        String category = categorySpinner.getSelectedItem().toString();  // 선택된 카테고리 가져오기
 
-            // 액티비티 종료 후 이전화면으로 돌아가기
-            finish();
-        });
+        if (category.equals("질문하기") || category.equals("자유 게시판")) {
+            // Question 객체 생성
+            Question newQuestion = new Question(null, -1, title, content, category, new Date(), new Date());
+            // Retrofit으로 POST 요청 보내기
+            sendQuestionToServer(newQuestion);
+        }
+
+        // 액티비티 종료 후 이전화면으로 돌아가기
+        finish();
     }
 
     private void sendQuestionToServer(Question question) {

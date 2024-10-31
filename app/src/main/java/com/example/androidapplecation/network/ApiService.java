@@ -16,9 +16,11 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiService {
+    String header = "Authorization";
+
     // Question
     @POST("/api/v1/question/post/save")
-    Call<Void> saveQuestion(@Header("Authorization") String token, @Body Question question);
+    Call<Void> saveQuestion(@Header(header) String token, @Body Question question);
 
     @GET("/api/v1/question/get/category/question")
     Call<List<Question>> getCategoryQuestion();
@@ -28,7 +30,7 @@ public interface ApiService {
 
     // Comment
     @POST("/api/v1/comment/post/create")
-    Call<Void> createComment(@Body Comment comment);
+    Call<Void> createComment(@Header(header) String token, @Body Comment comment);
 
     @POST("/api/v1/comment/post/update/id")
     Call<Void> updateComment(@Path("cid") int commentId, @Body Comment comment);
@@ -38,7 +40,7 @@ public interface ApiService {
 
     // User
     @GET("/api/v1/user/get/info")
-    Call<ResWrapper<User>> getUserInfo(@Header("Authorization") String token);
+    Call<ResWrapper<User>> getUserInfo(@Header(header) String token);
 
     @POST("/api/v1/user/post/register")
     Call<Void> registerUser(@Body User user);
