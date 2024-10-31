@@ -69,6 +69,7 @@ public class DashboardActivity extends BaseActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Question> questions = response.body();
                     questionAdapter.updateQuestions(questions);
+                    Log.d(TAG, "question data: " + String.valueOf(questions));
                     Log.d(TAG, "질문 데이터를 성공적으로 가져왔습니다.");
                 } else {
                     Log.e(TAG, "질문 데이터를 가져오지 못했습니다.");

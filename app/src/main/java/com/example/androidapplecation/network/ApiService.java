@@ -45,7 +45,7 @@ public interface ApiService {
     @POST("/api/v1/user/post/register")
     Call<Void> registerUser(@Body User user);
 
-    @GET("/api/v1/user/api/get/select-all")
+    @GET("/api/v1/user/get/all/users")
     Call<List<User>> getAllUsers();
 
     // 로그인
