@@ -66,7 +66,7 @@ public class CreatePostActivity extends BaseActivity {
         String content = contentEditText.getText().toString();
         String category = categorySpinner.getSelectedItem().toString();  // 선택된 카테고리 가져오기
 
-        if (category.equals("질문하기") || category.equals("자유 게시판")) {
+        if (category.equals("질문답변") || category.equals("자유 게시판")) {
             // Question 객체 생성
             Question newQuestion = new Question(null, -1, title, content, category, new Date(), new Date());
             // Retrofit으로 POST 요청 보내기

@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="buttonTextColor">#333333</color> <!-- 진한 회색 텍스트 -->
+    <color name="buttonBorderColor">#D3D3D3</color> <!-- 연한 회색 테두리 -->
 </resources>

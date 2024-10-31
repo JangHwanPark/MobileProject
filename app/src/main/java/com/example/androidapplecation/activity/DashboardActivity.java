@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import androidx.appcompat.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +60,28 @@ public class DashboardActivity extends BaseActivity {
         loadQuestions();
         loadFreeBoard();
         loadSelectUser();
+
+        // 검색창 리스너 설정
+        setupSearchView();
+    }
+
+    private void setupSearchView() {
+        SearchView searchView = findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                questionAdapter.filterQuestions(query); // 검색어에 맞는 필터 적용
+                showQuestionView();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                questionAdapter.filterQuestions(newText); // 실시간 검색 필터 적용
+                showQuestionView();
+                return true;
+            }
+        });
     }
 
     private void loadQuestions() {
@@ -70,7 +94,7 @@ public class DashboardActivity extends BaseActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Question> questions = response.body();
                     questionAdapter.updateQuestions(questions);
-                    Log.d(TAG, "question data: " + String.valueOf(questions));
+                    Log.d(TAG, "질문데이터 : " + questions);
                     Log.d(TAG, "질문 데이터를 성공적으로 가져왔습니다.");
                 } else {
                     Log.e(TAG, "질문 데이터를 가져오지 못했습니다.");
@@ -95,6 +119,7 @@ public class DashboardActivity extends BaseActivity {
                     List<Question> questions = response.body();
                     freeBoardAdapter.updateQuestions(questions);
                     Log.d(TAG, "자유게시판 데이터를 성공적으로 가져왔습니다.");
+                    Log.d(TAG, "자유게시판 데이터 : " + questions);
                 } else {
                     Log.e(TAG, "자유게시판 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
                 }
@@ -119,9 +144,6 @@ public class DashboardActivity extends BaseActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<User> users = response.body();
                     userAdapter.updateUsers(users); // 데이터를 업데이트하고 UI를 갱신합니다.
-                    Log.d(TAG, "사용자 데이터를 성공적으로 가져왔습니다.");
-                } else {
-                    Log.e(TAG, "사용자 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
                 }
             }
 

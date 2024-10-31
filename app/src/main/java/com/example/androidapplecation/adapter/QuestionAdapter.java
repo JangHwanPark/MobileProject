@@ -15,15 +15,20 @@ import com.example.androidapplecation.model.Question;
 import com.example.androidapplecation.model.User;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
-    private final List<Question> questionList;
+    private List<Question> questionList;
+    private final List<Question> allQuestions; // 전체 데이터를 저장하는 리스트
     private final Context context;
 
-    public QuestionAdapter(List<Question> questionList, Context context) {
-        this.questionList = questionList;
+    public QuestionAdapter(
+            List<Question> questionList,
+            Context context) {
+        this.questionList = new ArrayList<>(questionList); // 현재 리스트 초기화
+        this.allQuestions = new ArrayList<>(questionList); // 전체 리스트 초기화
         this.context = context;
     }
 
@@ -67,12 +72,33 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         return questionList.size();
     }
 
+    // 검색 키워드에 따라 데이터를 필터링하는 메서드
+    public void filterQuestions(String keyword) {
+        if (keyword == null || keyword.isEmpty()) {
+            questionList = new ArrayList<>(allQuestions); // 키워드가 없으면 전체 리스트를 표시
+        } else {
+            List<Question> filteredList = new ArrayList<>();
+            for (Question question : allQuestions) {
+                // 제목이나 내용에 키워드가 포함된 경우 필터링 리스트에 추가
+                if (question.getTitle().toLowerCase().contains(keyword.toLowerCase()) ||
+                        question.getContent().toLowerCase().contains(keyword.toLowerCase())) {
+                    filteredList.add(question);
+                }
+            }
+            questionList = filteredList;
+        }
+        notifyDataSetChanged(); // 화면 갱신
+    }
+
+    // 새 데이터를 받아서 화면을 업데이트하는 메서드
     public void updateQuestions(List<Question> newQuestions) {
-        questionList.clear();
-        questionList.addAll(newQuestions);
+        allQuestions.clear();
+        allQuestions.addAll(newQuestions);
+        questionList = new ArrayList<>(allQuestions); // 전체 데이터를 현재 리스트로 설정
         notifyDataSetChanged();
     }
 
+    // ViewHolder 클래스
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
         TextView questionTitle;
         TextView questionContent;
@@ -89,5 +115,4 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             questionDate = itemView.findViewById(R.id.question_date);                // 작성 날짜
         }
     }
-
 }
