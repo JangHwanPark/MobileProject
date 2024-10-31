@@ -41,9 +41,10 @@ public class DashboardActivity extends BaseActivity {
         setContentView(R.layout.activity_dashboard);
         initializeViews();
 
-        // 저장된 토큰을 가져와서 로그로 출력
-        String token = getTokenFromPreferences();
-        Log.d(TAG, "저장된 토큰: " + token); // 토큰 출력
+        // 초기화 시 기본으로 timelineTab만 보이도록 설정
+        recyclerView.setVisibility(View.VISIBLE);
+        questionRecyclerView.setVisibility(View.GONE);
+        mentorInfoView.setVisibility(View.GONE);
 
         // 어댑터 초기화 시 Context 전달
         questionAdapter = new QuestionAdapter(new ArrayList<>(), this);
@@ -168,18 +169,21 @@ public class DashboardActivity extends BaseActivity {
         recyclerView.setVisibility(View.VISIBLE);
         questionRecyclerView.setVisibility(View.GONE);
         mentorInfoView.setVisibility(View.GONE);
+        Log.d(TAG, "Timeline view visible");
     }
 
     private void showQuestionView() {
         recyclerView.setVisibility(View.GONE);
         questionRecyclerView.setVisibility(View.VISIBLE);
         mentorInfoView.setVisibility(View.GONE);
+        Log.d(TAG, "Question view visible");
     }
 
     private void showMentorView() {
         recyclerView.setVisibility(View.GONE);
         questionRecyclerView.setVisibility(View.GONE);
         mentorInfoView.setVisibility(View.VISIBLE);
+        Log.d(TAG, "Mentor view visible");
     }
 
     private String getTokenFromPreferences() {

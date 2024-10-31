@@ -96,12 +96,4 @@ public class Question {
     public void setAuthor(User author) {
         this.author = author;
     }
-
-    /*public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.author = company;
-    }*/
 }

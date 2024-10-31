@@ -9,6 +9,7 @@ public class User {
     private String birth;
     private String interest;
     private String role;
+    private String company;
 
     public User(
             int uid,
@@ -18,7 +19,8 @@ public class User {
             String name,
             String birth,
             String interest,
-            String role
+            String role,
+            String company
     ) {
         this.uid = uid;
         this.rid = rid;
@@ -28,6 +30,7 @@ public class User {
         this.birth = birth;
         this.interest = interest;
         this.role = role;
+        this.company = company;
     }
 
     public User(String email, String password, String name, String birth) {
@@ -100,5 +103,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

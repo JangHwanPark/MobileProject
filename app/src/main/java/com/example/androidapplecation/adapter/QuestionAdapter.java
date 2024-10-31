@@ -43,7 +43,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
         // 사용자 정보 설정
         holder.questionAuthor.setText(question.getAuthor().getName()); // 작성자 이름 설정
-        holder.questionUserCompany.setText(question.getAuthor().getName()); // 회사 설정
+        holder.questionUserCompany.setText(question.getAuthor().getCompany()); // 회사 설정
         holder.questionDate.setText(question.getCreatedAt().toString());
 
         // 아이템 클릭 이벤트
