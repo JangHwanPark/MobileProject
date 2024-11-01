@@ -1,8 +1,8 @@
-package com.example.androidapplecation.Presenter;
+package com.example.androidapplecation.presenter;
 
 import androidx.annotation.NonNull;
 
-import com.example.androidapplecation.View.RegisterView;
+import com.example.androidapplecation.view.RegisterView;
 import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.network.ApiService;
 import com.example.androidapplecation.network.RetrofitClient;

@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.androidapplecation.R;
-import com.example.androidapplecation.Presenter.RegisterPresenter;
-import com.example.androidapplecation.View.RegisterView;
+import com.example.androidapplecation.presenter.RegisterPresenter;
+import com.example.androidapplecation.view.RegisterView;
 import com.example.androidapplecation.model.User;
 import com.example.androidapplecation.util.FormValidation;
 

@@ -1,4 +1,4 @@
-package com.example.androidapplecation.View;
+package com.example.androidapplecation.view;
 
 import com.example.androidapplecation.model.User;
 
