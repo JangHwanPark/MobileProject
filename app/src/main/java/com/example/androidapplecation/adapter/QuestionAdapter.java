@@ -62,7 +62,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             intent.putExtra("title", question.getTitle()); // 제목 전달
             intent.putExtra("content", question.getContent()); // 내용 전달
             intent.putExtra("createAt", question.getCreatedAt());
-            Log.d("question", String.valueOf(intent));
+            // Log.d("question", String.valueOf(intent));
             context.startActivity(intent);
         });
     }

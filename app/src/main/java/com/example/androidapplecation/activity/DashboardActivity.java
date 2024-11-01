@@ -94,7 +94,6 @@ public class DashboardActivity extends BaseActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Question> questions = response.body();
                     questionAdapter.updateQuestions(questions);
-                    Log.d(TAG, "질문데이터 : " + questions);
                     Log.d(TAG, "질문 데이터를 성공적으로 가져왔습니다.");
                 } else {
                     Log.e(TAG, "질문 데이터를 가져오지 못했습니다.");
@@ -119,7 +118,6 @@ public class DashboardActivity extends BaseActivity {
                     List<Question> questions = response.body();
                     freeBoardAdapter.updateQuestions(questions);
                     Log.d(TAG, "자유게시판 데이터를 성공적으로 가져왔습니다.");
-                    Log.d(TAG, "자유게시판 데이터 : " + questions);
                 } else {
                     Log.e(TAG, "자유게시판 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
                 }

@@ -29,6 +29,9 @@ public interface ApiService {
     Call<List<Question>> getCategoryFreeBoard();
 
     // Comment
+    @GET("/api/v1/comment/get/{qid}")
+    Call<List<Comment>> getComments(@Path("qid") int qid);
+
     @POST("/api/v1/comment/post/create")
     Call<Void> createComment(@Header(header) String token, @Body Comment comment);
 
