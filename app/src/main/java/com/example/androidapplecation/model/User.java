@@ -2,7 +2,6 @@ package com.example.androidapplecation.model;
 
 public class User {
     private int uid;
-    private int rid;
     private String email;
     private String password;
     private String name;
@@ -12,32 +11,16 @@ public class User {
     private String company;
 
     public User(
-            int uid,
-            int rid,
             String email,
             String password,
             String name,
             String birth,
-            String interest,
-            String role,
-            String company
-    ) {
-        this.uid = uid;
-        this.rid = rid;
+            String interest) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.birth = birth;
         this.interest = interest;
-        this.role = role;
-        this.company = company;
-    }
-
-    public User(String email, String password, String name, String birth) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.birth = birth;
     }
 
     // Getters and Setters
@@ -47,14 +30,6 @@ public class User {
 
     public void setUid(int uid) {
         this.uid = uid;
-    }
-
-    public int getRid() {
-        return rid;
-    }
-
-    public void setRid(int rid) {
-        this.rid = rid;
     }
 
     public String getEmail() {
