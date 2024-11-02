@@ -15,30 +15,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 프로필 이미지 -->
-    <ImageView
-        android:id="@+id/profile_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:contentDescription="Profile Image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/component_header" />
-
-    <!-- 사용자 이름 -->
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="wrap_content"
+    <!-- 사용자 정보 -->
+    <LinearLayout
+        android:id="@+id/linearUserInfo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="사용자 이름"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profile_image" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/component_header"
+        android:orientation="horizontal">
+
+        <!-- 사용자 이미지 -->
+        <ImageView
+            android:id="@+id/question_user_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_account"/>
+
+        <!-- 사용자 텍스트 정보 -->
+        <LinearLayout
+            android:id="@+id/linearUserAccountInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/question_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름없음"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/question_user_company"
+                android:layout_width="wrap_content"
+                android:text="소속회사"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 정보 편집 버튼 -->
+        <Button
+            android:id="@+id/button_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="프로필 편집"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearUserAccountInfo" />
+    </LinearLayout>
 
     <!-- 사용자 이메일 -->
     <TextView
@@ -50,18 +78,31 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_name" />
+        app:layout_constraintTop_toBottomOf="@id/linearUserInfo" />
 
-    <!-- 정보 편집 버튼 -->
-    <Button
-        android:id="@+id/button_edit_profile"
+    <!-- 내가 작성한 게시글 목록 -->
+    <TextView
+        android:id="@+id/my_posts_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="프로필 편집"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="내가 작성한 게시글"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/user_email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/user_email" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 게시글 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_my_posts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/my_posts_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_logout" />
 
     <!-- 로그아웃 버튼 -->
     <Button
@@ -73,6 +114,6 @@
         android:textColor="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_edit_profile" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
