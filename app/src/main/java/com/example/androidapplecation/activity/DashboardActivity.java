@@ -3,52 +3,48 @@ package com.example.androidapplecation.activity;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import androidx.appcompat.widget.SearchView;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androidapplecation.R;
+import com.example.androidapplecation.activity.BaseActivity;
 import com.example.androidapplecation.adapter.QuestionAdapter;
 import com.example.androidapplecation.adapter.UserAdapter;
 import com.example.androidapplecation.model.Question;
 import com.example.androidapplecation.model.User;
-import com.example.androidapplecation.network.ApiService;
-import com.example.androidapplecation.network.RetrofitClient;
-import com.example.androidapplecation.R;
+import com.example.androidapplecation.presenter.DashboardPresenter;
+import com.example.androidapplecation.view.DashboardView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class DashboardActivity extends BaseActivity {
+public class DashboardActivity extends BaseActivity implements DashboardView {
     private QuestionAdapter questionAdapter, freeBoardAdapter;
     private UserAdapter userAdapter;
     private RecyclerView recyclerView, mentorInfoView, questionRecyclerView;
     private Button timelineTab, questionTab, mentorTab;
     private ImageButton homeButton, createPostButton, accountButton;
+    private DashboardPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
         initializeViews();
 
-        // 초기화 시 기본으로 timelineTab만 보이도록 설정
-        recyclerView.setVisibility(View.VISIBLE);
-        questionRecyclerView.setVisibility(View.GONE);
-        mentorInfoView.setVisibility(View.GONE);
+        // Presenter 초기화
+        presenter = new DashboardPresenter(this);
 
-        // 어댑터 초기화 시 Context 전달
+        // 기본으로 timelineTab만 보이도록 설정
+        showRecyclerView();
+
         questionAdapter = new QuestionAdapter(new ArrayList<>(), this);
         freeBoardAdapter = new QuestionAdapter(new ArrayList<>(), this);
         userAdapter = new UserAdapter(new ArrayList<>(), this);
@@ -57,11 +53,10 @@ public class DashboardActivity extends BaseActivity {
         recyclerView.setAdapter(freeBoardAdapter);
         mentorInfoView.setAdapter(userAdapter);
 
-        loadQuestions();
-        loadFreeBoard();
-        loadSelectUser();
+        presenter.loadQuestions();
+        presenter.loadFreeBoard();
+        presenter.loadUsers();
 
-        // 검색창 리스너 설정
         setupSearchView();
     }
 
@@ -70,84 +65,16 @@ public class DashboardActivity extends BaseActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                questionAdapter.filterQuestions(query); // 검색어에 맞는 필터 적용
+                questionAdapter.filterQuestions(query);
                 showQuestionView();
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                questionAdapter.filterQuestions(newText); // 실시간 검색 필터 적용
+                questionAdapter.filterQuestions(newText);
                 showQuestionView();
                 return true;
-            }
-        });
-    }
-
-    private void loadQuestions() {
-        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-
-        Call<List<Question>> callQuestionData = apiService.getCategoryQuestion();
-        callQuestionData.enqueue(new Callback<List<Question>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Question>> call, @NonNull Response<List<Question>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Question> questions = response.body();
-                    questionAdapter.updateQuestions(questions);
-                    Log.d(TAG, "질문 데이터를 성공적으로 가져왔습니다.");
-                } else {
-                    Log.e(TAG, "질문 데이터를 가져오지 못했습니다.");
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
-                Log.e(TAG, "서버 통신 오류: " + t.getMessage());
-            }
-        });
-    }
-
-    private void loadFreeBoard() {
-        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-
-        Call<List<Question>> callFreeBoardData = apiService.getCategoryFreeBoard();
-        callFreeBoardData.enqueue(new Callback<List<Question>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Question>> call, @NonNull Response<List<Question>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Question> questions = response.body();
-                    freeBoardAdapter.updateQuestions(questions);
-                    Log.d(TAG, "자유게시판 데이터를 성공적으로 가져왔습니다.");
-                } else {
-                    Log.e(TAG, "자유게시판 데이터를 가져오지 못했습니다. 응답 코드: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
-                Log.e(TAG, "서버 통신 오류: " + t.getMessage());
-            }
-        });
-    }
-
-    private void loadSelectUser() {
-        ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
-
-        Call<List<User>> callUserData = apiService.getAllUsers();
-        callUserData.enqueue(new Callback<List<User>>() {
-            @Override
-            public void onResponse(
-                    @NonNull Call<List<User>> call,
-                    @NonNull Response<List<User>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<User> users = response.body();
-                    userAdapter.updateUsers(users); // 데이터를 업데이트하고 UI를 갱신합니다.
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
-                Log.e(TAG, "서버 통신 오류: " + t.getMessage());
             }
         });
     }
@@ -181,33 +108,52 @@ public class DashboardActivity extends BaseActivity {
 
     private void setupFooterButtonListeners() {
         homeButton.setOnClickListener(v -> showRecyclerView());
-        createPostButton.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, CreatePostActivity.class)));
-        accountButton.setOnClickListener(v -> startActivity(new Intent(DashboardActivity.this, UserAccountActivity.class)));
+        createPostButton.setOnClickListener(v -> startActivity(new Intent(this, CreatePostActivity.class)));
+        accountButton.setOnClickListener(v -> startActivity(new Intent(this, UserAccountActivity.class)));
     }
 
-    private void showRecyclerView() {
+    // DashboardView 인터페이스 메서드 구현
+    @Override
+    public void showQuestions(List<Question> questions) {
+        questionAdapter.updateQuestions(questions);
+    }
+
+    @Override
+    public void showFreeBoard(List<Question> questions) {
+        freeBoardAdapter.updateQuestions(questions);
+    }
+
+    @Override
+    public void showUsers(List<User> users) {
+        userAdapter.updateUsers(users);
+    }
+
+    @Override
+    public void showError(String message) {
+        Log.e(TAG, message);
+    }
+
+    @Override
+    public void showRecyclerView() {
         recyclerView.setVisibility(View.VISIBLE);
         questionRecyclerView.setVisibility(View.GONE);
         mentorInfoView.setVisibility(View.GONE);
         Log.d(TAG, "Timeline view visible");
     }
 
-    private void showQuestionView() {
+    @Override
+    public void showQuestionView() {
         recyclerView.setVisibility(View.GONE);
         questionRecyclerView.setVisibility(View.VISIBLE);
         mentorInfoView.setVisibility(View.GONE);
         Log.d(TAG, "Question view visible");
     }
 
-    private void showMentorView() {
+    @Override
+    public void showMentorView() {
         recyclerView.setVisibility(View.GONE);
         questionRecyclerView.setVisibility(View.GONE);
         mentorInfoView.setVisibility(View.VISIBLE);
         Log.d(TAG, "Mentor view visible");
-    }
-
-    private String getTokenFromPreferences() {
-        SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
-        return prefs.getString("token", null); // 저장된 토큰을 반환, 없으면 null 반환
     }
 }

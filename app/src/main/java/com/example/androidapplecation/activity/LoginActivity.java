@@ -32,26 +32,30 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
         // 로그인 버튼 초기화 및 클릭 리스너 설정
         Button btnSubmit = findViewById(R.id.loginbutton);
-        btnSubmit.setOnClickListener(v -> {
-            String email = editTextEmail.getText().toString().trim();
-            String password = editTextPassword.getText().toString().trim();
-
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(
-                        LoginActivity.this,
-                        "아이디와 비밀번호를 입력해주세요.",
-                        Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            // Presenter를 통해 로그인 처리 요청
-            presenter.loginUser(email, password);
-        });
+        btnSubmit.setOnClickListener(v -> handleLoginButtonClick()); // 함수로 분리
 
         // 회원가입 링크 클릭 리스너 설정
         TextView signUpText = findViewById(R.id.signin);
         signUpText.setOnClickListener(v -> navigateToRegister());
     }
+
+    // 로그인 버튼 클릭 처리 메서드
+    private void handleLoginButtonClick() {
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(
+                    LoginActivity.this,
+                    "아이디와 비밀번호를 입력해주세요.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Presenter를 통해 로그인 처리 요청
+        presenter.loginUser(email, password);
+    }
+
 
     @Override
     public void showLoginSuccess(String token) {
