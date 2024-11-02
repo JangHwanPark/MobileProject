@@ -5,6 +5,54 @@
     android:padding="8dp"
     android:orientation="vertical">
 
+    <!-- 사용자 정보 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- 사용자 이미지 -->
+        <ImageView
+            android:id="@+id/question_user_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_account"/>
+
+        <!-- 사용자 텍스트 정보 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/question_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름없음"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/question_user_company"
+                android:layout_width="wrap_content"
+                android:text="소속회사"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/question_date"
+                android:layout_width="wrap_content"
+                android:text="date"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/textViewCommentContent"
         android:layout_width="wrap_content"
