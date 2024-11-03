@@ -75,7 +75,7 @@
 
     <!-- 작성일 -->
     <TextView
-        android:id="@+id/question_date"
+        android:id="@+id/textViewCreateAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle"
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@id/question_date"
+        app:layout_constraintTop_toBottomOf="@id/textViewCreateAt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />

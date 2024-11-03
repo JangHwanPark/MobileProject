@@ -59,6 +59,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PostDetailActivity.class);
             intent.putExtra("qid", question.getId());  // question ID 전달
+            intent.putExtra("authorName", question.getAuthor().getName()); // 작성자 전달
+            intent.putExtra("authorCompany", question.getAuthor().getCompany()); // 작성자 회사 전달
             intent.putExtra("title", question.getTitle()); // 제목 전달
             intent.putExtra("content", question.getContent()); // 내용 전달
             intent.putExtra("createAt", question.getCreatedAt());

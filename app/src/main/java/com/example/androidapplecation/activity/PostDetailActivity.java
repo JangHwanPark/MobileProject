@@ -23,7 +23,7 @@ import java.util.List;
 public class PostDetailActivity extends BaseActivity implements PostDetailView {
     private EditText editTextComment;
     private RecyclerView recyclerViewComments;
-    private TextView textViewNoComments, detailUserName, detailUserCompany;
+    private TextView textViewNoComments;
     private CommentAdapter commentAdapter;
     private final List<Comment> commentList = new ArrayList<>();
     private PostDetailPresenter presenter;
@@ -51,16 +51,18 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         setupUndoButton();
 
         // UI 요소와 연결
+        // 게시글 작성자 정보
+        TextView detailUserName = findViewById(R.id.detailQuestionAuthor);
+        TextView detailUserCompany = findViewById(R.id.detailQuestionCompany);
+        
+        // 게시글 정보
         TextView textViewTitle = findViewById(R.id.textViewTitle);
         TextView textViewContent = findViewById(R.id.textViewContent);
+        TextView textViewCreateAt = findViewById(R.id.textViewCreateAt);
+
+        // 리사이클뷰 초기화
         recyclerViewComments = findViewById(R.id.recyclerViewComments);
         textViewNoComments = findViewById(R.id.textViewNoComments);
-        
-        // 게시글 작성자 정보
-        detailUserName = findViewById(R.id.detailQuestionAuthor);
-        detailUserCompany = findViewById(R.id.detailQuestionCompany);
-        
-        // 댓글 작성자 정보
 
         // RecyclerView와 어댑터 초기화
         commentAdapter = new CommentAdapter(commentList);
@@ -72,12 +74,19 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         Button buttonSendComment = findViewById(R.id.buttonSendComment);
 
         // Intent로부터 데이터 받기
+        String authorName = getIntent().getStringExtra("authorName");
+        String authorCompany = getIntent().getStringExtra("authorCompany");
         String title = getIntent().getStringExtra("title");
         String content = getIntent().getStringExtra("content");
+        String createAt = getIntent().getStringExtra("createAt");
 
+        detailUserName.setText(authorName != null ? authorName : "이름없음");
+        detailUserCompany.setText(authorCompany != null ? authorCompany : "회사없음");
         textViewTitle.setText(title != null ? title : "No Title");
         textViewContent.setText(content != null ? content : "No Content");
+        textViewCreateAt.setText(createAt != null ? createAt : "No Date");
 
+        // 버튼 클릭 이벤트
         buttonSendComment.setOnClickListener(v -> handleCommentSubmit());
     }
 
