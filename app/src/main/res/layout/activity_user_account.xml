@@ -43,14 +43,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/question_author"
+                android:id="@+id/userAccountInfoName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이름없음"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/question_user_company"
+                android:id="@+id/userAccountInfoCompany"
                 android:layout_width="wrap_content"
                 android:text="소속회사"
                 android:layout_height="wrap_content" />
@@ -87,19 +87,6 @@
             app:layout_constraintTop_toBottomOf="@id/linearUserAccountInfo" />
     </LinearLayout>
 
-    <!-- 사용자 이메일 -->
-    <TextView
-        android:id="@+id/user_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textColor="#757575"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearUserAccountInfoEdit"
-        app:layout_constraintTop_toTopOf="@id/linearUserAccountInfoEdit"/>
-
     <!-- 내가 작성한 게시글 목록 -->
     <TextView
         android:id="@+id/my_posts_label"
@@ -109,7 +96,7 @@
         android:text="내가 작성한 게시글"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/user_email"
+        app:layout_constraintTop_toBottomOf="@id/linearUserAccountInfoEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

@@ -1,5 +1,7 @@
 package com.example.androidapplecation.model;
 
+import androidx.annotation.NonNull;
+
 public class User {
     private int uid;
     private String email;
@@ -87,4 +89,20 @@ public class User {
     public void setCompany(String company) {
         this.company = company;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", birth='" + birth + '\'' +
+                ", interest='" + interest + '\'' +
+                ", role='" + role + '\'' +
+                ", company='" + company + '\'' +
+                '}';
+    }
+
 }

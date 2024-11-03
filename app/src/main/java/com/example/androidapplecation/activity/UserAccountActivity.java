@@ -14,7 +14,7 @@ import com.example.androidapplecation.presenter.UserAccountPresenter;
 import com.example.androidapplecation.view.UserAccountView;
 
 public class UserAccountActivity extends BaseActivity implements UserAccountView {
-    private TextView userEmail;
+    private TextView userName, userCompany;
     private UserAccountPresenter presenter;
 
     @Override
@@ -29,7 +29,8 @@ public class UserAccountActivity extends BaseActivity implements UserAccountView
         presenter = new UserAccountPresenter(this);
 
         // TextView 초기화
-        userEmail = findViewById(R.id.user_email);
+        userName = findViewById(R.id.userAccountInfoName);
+        userCompany = findViewById(R.id.userAccountInfoCompany);
 
         // 사용자 정보 요청
         presenter.fetchUserInfo();
@@ -38,9 +39,11 @@ public class UserAccountActivity extends BaseActivity implements UserAccountView
     // UserAccountView 인터페이스 구현
     @Override
     public void showUserInfo(User user) {
-        userEmail.setText(user.getEmail());
-        Toast.makeText(this, "Hello, " + user.getEmail(), Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "사용자 이메일: " + user.getEmail());
+        Log.d(TAG, "사용자 어카운트 정보 : " + user.toString());
+        userName.setText(user.getName());
+        userCompany.setText(user.getCompany());
+        
+        Toast.makeText(this, "Hello, " + user.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
