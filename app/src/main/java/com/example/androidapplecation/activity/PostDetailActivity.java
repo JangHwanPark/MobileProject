@@ -23,9 +23,9 @@ import java.util.List;
 public class PostDetailActivity extends BaseActivity implements PostDetailView {
     private EditText editTextComment;
     private RecyclerView recyclerViewComments;
-    private TextView textViewNoComments;
+    private TextView textViewNoComments, detailUserName, detailUserCompany;
     private CommentAdapter commentAdapter;
-    private List<Comment> commentList = new ArrayList<>();
+    private final List<Comment> commentList = new ArrayList<>();
     private PostDetailPresenter presenter;
 
     @Override
@@ -55,6 +55,12 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         TextView textViewContent = findViewById(R.id.textViewContent);
         recyclerViewComments = findViewById(R.id.recyclerViewComments);
         textViewNoComments = findViewById(R.id.textViewNoComments);
+        
+        // 게시글 작성자 정보
+        detailUserName = findViewById(R.id.detailQuestionAuthor);
+        detailUserCompany = findViewById(R.id.detailQuestionCompany);
+        
+        // 댓글 작성자 정보
 
         // RecyclerView와 어댑터 초기화
         commentAdapter = new CommentAdapter(commentList);
@@ -75,6 +81,7 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         buttonSendComment.setOnClickListener(v -> handleCommentSubmit());
     }
 
+    // 댓글 등록
     private void handleCommentSubmit() {
         String commentText = editTextComment.getText().toString().trim();
         if (!commentText.isEmpty()) {

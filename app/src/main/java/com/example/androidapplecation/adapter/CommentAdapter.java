@@ -26,9 +26,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
+        // Comment 정보 표시
         Comment comment = commentList.get(position);
         holder.textViewCommentContent.setText(comment.getContent());
-        // 필요에 따라 추가 필드 설정 가능
+        holder.textViewCommentCreateDate.setText(comment.getCreateAt().toString());
+
+        // User 정보 표시
+        if (comment.getUser() != null) {
+            holder.textViewUserName.setText(comment.getUser().getName());
+            holder.textViewUserCompany.setText(comment.getUser().getCompany());
+        }
     }
 
     @Override
@@ -38,10 +45,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     static class CommentViewHolder extends RecyclerView.ViewHolder {
         TextView textViewCommentContent;
+        TextView textViewCommentCreateDate; // 댓글 작성 시간
+        TextView textViewUserName;          // 사용자 이름 표시
+        TextView textViewUserCompany;       // 사용자 회사 정보 표시
 
         public CommentViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewCommentContent = itemView.findViewById(R.id.textViewCommentContent);
+            textViewUserName = itemView.findViewById(R.id.textViewCommentUserName);
+            textViewUserCompany = itemView.findViewById(R.id.textViewCommentUserCompany);
+            textViewCommentCreateDate = itemView.findViewById(R.id.textViewCommentCreateDate);
         }
     }
 

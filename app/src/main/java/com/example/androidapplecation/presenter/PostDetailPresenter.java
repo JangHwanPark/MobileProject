@@ -1,10 +1,14 @@
 package com.example.androidapplecation.presenter;
+import static android.content.ContentValues.TAG;
+
 import com.example.androidapplecation.model.Comment;
 import com.example.androidapplecation.network.ApiService;
 import com.example.androidapplecation.network.RetrofitClient;
 import com.example.androidapplecation.view.PostDetailView;
 
 import android.content.SharedPreferences;
+import android.util.Log;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

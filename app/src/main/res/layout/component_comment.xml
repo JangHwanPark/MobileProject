@@ -28,20 +28,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/question_author"
+                android:id="@+id/textViewCommentUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이름없음"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/question_user_company"
+                android:id="@+id/textViewCommentUserCompany"
                 android:layout_width="wrap_content"
                 android:text="소속회사"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/question_date"
+                android:id="@+id/textViewCommentCreateDate"
                 android:layout_width="wrap_content"
                 android:text="date"
                 android:layout_height="wrap_content" />
