@@ -55,14 +55,33 @@
                 android:text="소속회사"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+    </LinearLayout>
 
-        <!-- 정보 편집 버튼 -->
+    <!-- 정보 편집 버튼 -->
+    <LinearLayout
+        android:id="@+id/linearUserAccountInfoEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/linearUserInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/userAccountInfoEdit"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_create"/>
+
         <Button
             android:id="@+id/button_edit_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="147dp"
+            android:layout_height="35dp"
+            android:background="@drawable/button_white"
             android:text="프로필 편집"
+            android:textColor="@android:color/black"
+            android:textSize="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearUserAccountInfo" />
@@ -78,7 +97,8 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearUserInfo" />
+        app:layout_constraintTop_toBottomOf="@id/linearUserAccountInfoEdit"
+        app:layout_constraintTop_toTopOf="@id/linearUserAccountInfoEdit"/>
 
     <!-- 내가 작성한 게시글 목록 -->
     <TextView
