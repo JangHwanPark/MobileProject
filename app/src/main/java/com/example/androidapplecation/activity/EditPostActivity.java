@@ -34,7 +34,7 @@ public class EditPostActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_post);
+        setContentView(R.layout.activity_edit_post);
 
         // EditText 초기화
         titleEditText = findViewById(R.id.question_title);
@@ -62,7 +62,7 @@ public class EditPostActivity extends BaseActivity {
     }
 
     private void handleClickSubmitButton() {
-        String title = titleEditText.getText().toString();
+        /*String title = titleEditText.getText().toString();
         String content = contentEditText.getText().toString();
         String category = categorySpinner.getSelectedItem().toString();  // 선택된 카테고리 가져오기
 
@@ -71,10 +71,11 @@ public class EditPostActivity extends BaseActivity {
             Question newQuestion = new Question(null, -1, title, content, category, new Date(), new Date());
             // Retrofit으로 POST 요청 보내기
             sendQuestionToServer(newQuestion);
-        }
+        }*/
+        Toast.makeText(this, "기능 구현중", Toast.LENGTH_SHORT).show();
 
         // 액티비티 종료 후 이전화면으로 돌아가기
-        finish();
+        // finish();
     }
 
     private void sendQuestionToServer(Question question) {

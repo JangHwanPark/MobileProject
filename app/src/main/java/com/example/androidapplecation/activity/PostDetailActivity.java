@@ -1,5 +1,6 @@
 package com.example.androidapplecation.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -124,7 +125,9 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         popup.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.actionEditPost) {
-                editPost();
+                Toast.makeText(this, "게시글 수정하기", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, EditPostActivity.class);
+                startActivity(intent);
                 return true;
             } else if (itemId == R.id.actionDeletePost) {
                 presenter.deletePost(getQid());
@@ -135,11 +138,6 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         popup.show();
     }
 
-    // 게시글 수정
-    private void editPost() {
-        Toast.makeText(this, "게시글 수정하기", Toast.LENGTH_SHORT).show();
-    }
-
     @Override
     public void showCommentPopupMenu(View view, int commentId) {
         PopupMenu popup = new PopupMenu(this, view);
@@ -148,7 +146,7 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         popup.setOnMenuItemClickListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.commentActionEditPost) {
-                editComment(commentId);  // 댓글 수정
+                editCommentInline(commentId);  // 댓글 수정
                 return true;
             } else if (itemId == R.id.commentActionDeletePost) {
                 presenter.deleteComment(commentId);  // 댓글 삭제
@@ -160,8 +158,9 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
     }
 
     // 댓글 수정
-    private void editComment(int commentId) {
-        Toast.makeText(this, "댓글 수정하기", Toast.LENGTH_SHORT).show();
+    private void editCommentInline(int commentId) {
+        // RecyclerView 내에서 EditText를 활성화하거나 댓글의 텍스트뷰를 EditText로 교체하여 수정 모드 활성화
+        commentAdapter.enableEditMode(commentId);
     }
 
     @Override

@@ -29,6 +29,7 @@
         <activity android:name=".activity.CreatePostActivity" />
         <activity android:name=".activity.UserAccountActivity" />
         <activity android:name=".activity.PostDetailActivity" />
+        <activity android:name=".activity.EditPostActivity" />
     </application>
 
 </manifest>

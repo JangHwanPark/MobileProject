@@ -8,13 +8,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidapplecation.R;
-import com.example.androidapplecation.activity.PostDetailActivity;
 import com.example.androidapplecation.model.Comment;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
     private List<Comment> commentList;
-    private OnCommentOptionsClickListener onCommentOptionsClickListener;
+    private final OnCommentOptionsClickListener onCommentOptionsClickListener;
 
     public CommentAdapter(List<Comment> commentList, OnCommentOptionsClickListener listener) {
         this.commentList = commentList;
@@ -25,6 +24,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         void onOptionsClick(View view, int commentId);
     }
 
+    // 수정 모드 활성화 메서드
+    public void enableEditMode(int position) {
+        // 수정 모드 위치 저장 변수
+        notifyItemChanged(position); // 해당 위치의 아이템 갱신
+    }
+
     @NonNull
     @Override
     public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,7 +38,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
+    public void onBindViewHolder(
+            @NonNull CommentViewHolder holder,
+            int position) {
         // Comment 정보 표시
         Comment comment = commentList.get(position);
         holder.textViewCommentContent.setText(comment.getContent());
