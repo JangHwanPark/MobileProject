@@ -28,6 +28,12 @@ public interface ApiService {
     @GET("/api/v1/question/get/category/free-board")
     Call<List<Question>> getCategoryFreeBoard();
 
+    @POST("/api/v1/question/post/{qid}/update")
+    Call<Void> editQuestion(String token, int postId, String newContent);
+
+    @POST("/api/v1/question/post/{qid}/delete")
+    Call<Void> deleteQuestion(String token, int postId);
+
     // Comment
     @GET("/api/v1/comment/get/{qid}")
     Call<List<Comment>> getComments(@Path("qid") int qid);
@@ -35,10 +41,10 @@ public interface ApiService {
     @POST("/api/v1/comment/post/create")
     Call<Void> createComment(@Header(header) String token, @Body Comment comment);
 
-    @POST("/api/v1/comment/post/update/id")
-    Call<Void> updateComment(@Path("cid") int commentId, @Body Comment comment);
+    @POST("/api/v1/comment/post/update")
+    Call<Void> updateComment(@Body Comment comment);
 
-    @POST("/api/v1/comment/post/delete/id")
+    @POST("/api/v1/comment/post/delete/{cid}")
     Call<Void> deleteComment(@Path("cid") int commentId);
 
     // User

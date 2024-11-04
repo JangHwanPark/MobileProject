@@ -115,7 +115,8 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
     }
 
     // 팝업 메뉴
-    private void showPopupMenu(View view) {
+    @Override
+    public void showPopupMenu(View view) {
         PopupMenu popup = new PopupMenu(this, view);
         popup.getMenuInflater().inflate(R.menu.post_options_menu, popup.getMenu());
 
@@ -126,23 +127,20 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
                 editPost();
                 return true;
             } else if (itemId == R.id.actionDeletePost) {
-                deletePost();
+                presenter.deletePost(getQid());
                 return true;
             }
             return false;
         });
         popup.show();
     }
+
     // 게시글 수정
     private void editPost() {
         Toast.makeText(this, "게시글 수정하기", Toast.LENGTH_SHORT).show();
     }
 
-    // 게시글 삭제ㅅ
-    private void deletePost() {
-        Toast.makeText(this, "게시글 삭제하기", Toast.LENGTH_SHORT).show();
-    }
-
+    @Override
     public void showCommentPopupMenu(View view, int commentId) {
         PopupMenu popup = new PopupMenu(this, view);
         popup.getMenuInflater().inflate(R.menu.comment_options_menu, popup.getMenu());
@@ -153,7 +151,7 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
                 editComment(commentId);  // 댓글 수정
                 return true;
             } else if (itemId == R.id.commentActionDeletePost) {
-                deleteComment(commentId);  // 댓글 삭제
+                presenter.deleteComment(commentId);  // 댓글 삭제
                 return true;
             }
             return false;
@@ -164,11 +162,6 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
     // 댓글 수정
     private void editComment(int commentId) {
         Toast.makeText(this, "댓글 수정하기", Toast.LENGTH_SHORT).show();
-    }
-
-    // 댓글 삭제
-    private void deleteComment(int commentId) {
-        Toast.makeText(this, "댓글 삭제하기", Toast.LENGTH_SHORT).show();
     }
 
     @Override
