@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,7 +69,7 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         textViewNoComments = findViewById(R.id.textViewNoComments);
 
         // RecyclerView와 어댑터 초기화
-        commentAdapter = new CommentAdapter(commentList);
+        commentAdapter = new CommentAdapter(commentList, this::showCommentPopupMenu);
         recyclerViewComments.setAdapter(commentAdapter);
         recyclerViewComments.setLayoutManager(new LinearLayoutManager(this));
 
@@ -89,6 +92,12 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
 
         // 버튼 클릭 이벤트
         buttonSendComment.setOnClickListener(v -> handleCommentSubmit());
+
+        // 햄버거 아이콘 버튼 초기화
+        ImageButton buttonMoreOptions = findViewById(R.id.button_more_options);
+
+        // 햄버거 버튼 클릭 시 팝업 메뉴 표시
+        buttonMoreOptions.setOnClickListener(this::showPopupMenu);
     }
 
     // 댓글 등록
@@ -103,6 +112,63 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
         } else {
             Toast.makeText(this, "댓글을 입력하세요.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // 팝업 메뉴
+    private void showPopupMenu(View view) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenuInflater().inflate(R.menu.post_options_menu, popup.getMenu());
+
+        // 메뉴 항목 클릭 리스너 설정
+        popup.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.actionEditPost) {
+                editPost();
+                return true;
+            } else if (itemId == R.id.actionDeletePost) {
+                deletePost();
+                return true;
+            }
+            return false;
+        });
+        popup.show();
+    }
+    // 게시글 수정
+    private void editPost() {
+        Toast.makeText(this, "게시글 수정하기", Toast.LENGTH_SHORT).show();
+    }
+
+    // 게시글 삭제ㅅ
+    private void deletePost() {
+        Toast.makeText(this, "게시글 삭제하기", Toast.LENGTH_SHORT).show();
+    }
+
+    public void showCommentPopupMenu(View view, int commentId) {
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.getMenuInflater().inflate(R.menu.comment_options_menu, popup.getMenu());
+
+        popup.setOnMenuItemClickListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.commentActionEditPost) {
+                editComment(commentId);  // 댓글 수정
+                return true;
+            } else if (itemId == R.id.commentActionDeletePost) {
+                deleteComment(commentId);  // 댓글 삭제
+                return true;
+            }
+            return false;
+        });
+        popup.show();
+    }
+
+    // 댓글 수정
+    private void editComment(int commentId) {
+        Toast.makeText(this, "댓글 수정하기", Toast.LENGTH_SHORT).show();
+    }
+
+    // 댓글 삭제
+    private void deleteComment(int commentId) {
+        Toast.makeText(this, "댓글 삭제하기", Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -58,6 +58,16 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
+
+        <!-- 게시글 삭제, 수정 버튼 -->
+        <ImageButton
+            android:id="@+id/button_more_options"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_hamburger"
+            android:contentDescription="More options"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
     <!-- 제목을 표시할 TextView -->
