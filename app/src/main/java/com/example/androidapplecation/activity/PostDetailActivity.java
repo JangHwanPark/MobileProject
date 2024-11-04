@@ -18,6 +18,7 @@ import com.example.androidapplecation.presenter.PostDetailPresenter;
 import com.example.androidapplecation.view.PostDetailView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PostDetailActivity extends BaseActivity implements PostDetailView {
@@ -97,6 +98,7 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
             Comment comment = new Comment();
             comment.setContent(commentText);
             comment.setQid(getQid());
+            comment.setCreateAt(new Date());
             presenter.postComment(comment); // 프레젠터에서 댓글 등록 처리
         } else {
             Toast.makeText(this, "댓글을 입력하세요.", Toast.LENGTH_SHORT).show();
