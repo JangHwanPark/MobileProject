@@ -4,7 +4,7 @@
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#fff" /> <!-- 버튼 배경색 (보라색) -->
+            <solid android:color="@android:color/white" />
         </shape>
     </item>
 </ripple>

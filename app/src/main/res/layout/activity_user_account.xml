@@ -67,24 +67,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/userAccountInfoEdit"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_create"/>
-
-        <Button
-            android:id="@+id/button_edit_profile"
-            android:layout_width="147dp"
+        <!-- android:drawableLeft="@drawable/ic_create" -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonEditProfile"
+            android:layout_width="379dp"
             android:layout_height="35dp"
-            android:background="@drawable/button_white"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/primary_button"
+            android:drawablePadding="2dp"
             android:text="프로필 편집"
             android:textColor="@android:color/black"
-            android:textSize="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearUserAccountInfo" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <!-- 내가 작성한 게시글 목록 -->
@@ -112,13 +106,14 @@
         app:layout_constraintBottom_toTopOf="@id/button_logout" />
 
     <!-- 로그아웃 버튼 -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="379dp"
+        android:layout_height="40dp"
         android:layout_marginTop="16dp"
         android:text="로그아웃"
         android:textColor="@android:color/holo_red_dark"
+        android:background="@drawable/button_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

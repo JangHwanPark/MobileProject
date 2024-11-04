@@ -125,14 +125,14 @@
             android:padding="10dp" />
 
         <!-- 댓글 전송 버튼 -->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonSendComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="전송"
             android:padding="10dp"
             android:background="@drawable/button_background"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
