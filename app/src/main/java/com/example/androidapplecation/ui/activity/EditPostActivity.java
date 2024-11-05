@@ -35,19 +35,13 @@ public class EditPostActivity extends BaseActivity {
         setContentView(R.layout.activity_edit_post);
 
         // EditText 초기화
-        titleEditText = findViewById(R.id.question_title);
-        contentEditText = findViewById(R.id.question_content);
+        titleEditText = findViewById(R.id.editPostTitle);
+        contentEditText = findViewById(R.id.editPostContent);
 
         // Spinner 초기화
-        categorySpinner = findViewById(R.id.category_spinner);
-        Spinner interestSpinner = findViewById(R.id.interest_spinner);
+        Spinner interestSpinner = findViewById(R.id.editPostInterestSpinner);
 
         // Spinner에 표시할 항목 설정
-        ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
-                this, R.array.post_categories, android.R.layout.simple_spinner_item);
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner.setAdapter(categoryAdapter);
-
         ArrayAdapter<CharSequence> interestAdapter = ArrayAdapter.createFromResource(
                 this, R.array.post_interest, android.R.layout.simple_spinner_item);
         interestAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

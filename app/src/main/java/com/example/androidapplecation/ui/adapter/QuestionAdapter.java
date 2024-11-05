@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidapplecation.R;
@@ -17,11 +20,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * {@code QuestionAdapter}는 {@link Question} 항목 목록을 표시하는 RecyclerView 어댑터입니다.
+ * 키워드로 질문을 필터링하고, 질문 목록을 업데이트하는 기능을 제공합니다.
+ */
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
     private List<Question> questionList;
     private final List<Question> allQuestions; // 전체 데이터를 저장하는 리스트
     private final Context context;
 
+    /**
+     * {@code QuestionAdapter}를 생성합니다.
+     *
+     * @param questionList 초기 질문 목록.
+     * @param context      어댑터가 사용되는 컨텍스트.
+     */
     public QuestionAdapter(
             List<Question> questionList,
             Context context) {
@@ -30,6 +43,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         this.context = context;
     }
 
+    /**
+     * 질문 항목 뷰를 생성하고 새로운 {@link QuestionViewHolder}를 반환합니다.
+     *
+     * @param parent   부모 ViewGroup.
+     * @param viewType 새로운 뷰의 뷰 타입.
+     * @return 새로운 {@link QuestionViewHolder} 인스턴스.
+     */
     @NonNull
     @Override
     public QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -37,6 +57,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         return new QuestionViewHolder(view);
     }
 
+    /**
+     * 지정된 위치에 있는 {@link QuestionViewHolder}에 데이터를 바인딩합니다.
+     * 항목 클릭 및 좋아요 버튼 클릭 리스너를 설정합니다.
+     *
+     * @param holder   데이터를 바인딩할 ViewHolder.
+     * @param position 데이터 집합에서의 항목 위치.
+     */
     @Override
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
         Question question = questionList.get(position);
@@ -65,14 +92,27 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             // Log.d("question", String.valueOf(intent));
             context.startActivity(intent);
         });
+
+        holder.questionCardLikeButton.setOnClickListener(v -> {
+            Toast.makeText(context, "좋아요 버튼 클릭", Toast.LENGTH_SHORT).show();
+        });
     }
 
+    /**
+     * 어댑터가 보유한 데이터 집합의 전체 항목 수를 반환합니다.
+     *
+     * @return 전체 항목 수.
+     */
     @Override
     public int getItemCount() {
         return questionList.size();
     }
 
-    // 검색 키워드에 따라 데이터를 필터링하는 메서드
+    /**
+     * 키워드에 따라 질문 목록을 필터링하고, 표시되는 목록을 업데이트합니다.
+     *
+     * @param keyword 검색 키워드.
+     */
     public void filterQuestions(String keyword) {
         if (keyword == null || keyword.isEmpty()) {
             questionList = new ArrayList<>(allQuestions); // 키워드가 없으면 전체 리스트를 표시
@@ -90,7 +130,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         notifyDataSetChanged(); // 화면 갱신
     }
 
-    // 새 데이터를 받아서 화면을 업데이트하는 메서드
+    /**
+     * 새로운 질문 목록으로 어댑터를 업데이트하고, 화면을 갱신합니다.
+     *
+     * @param newQuestions 새로 표시할 질문 목록.
+     */
     public void updateQuestions(List<Question> newQuestions) {
         allQuestions.clear();
         allQuestions.addAll(newQuestions);
@@ -98,14 +142,22 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         notifyDataSetChanged();
     }
 
-    // ViewHolder 클래스
+    /**
+     * 질문 항목을 위한 ViewHolder 클래스입니다. 각 질문 항목에 대한 뷰를 참조합니다.
+     */
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
         TextView questionTitle;
         TextView questionContent;
         TextView questionAuthor;
         TextView questionUserCompany;
         TextView questionDate;
+        Button questionCardLikeButton;
 
+        /**
+         * 새로운 {@code QuestionViewHolder}를 생성하고 뷰 참조를 초기화합니다.
+         *
+         * @param itemView 질문 항목의 루트 뷰.
+         */
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
             questionTitle = itemView.findViewById(R.id.question_title);
@@ -113,6 +165,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             questionAuthor = itemView.findViewById(R.id.question_author);          // 사용자 이름
             questionUserCompany = itemView.findViewById(R.id.question_user_company); // 사용자 회사
             questionDate = itemView.findViewById(R.id.question_date);                // 작성 날짜
+            questionCardLikeButton = itemView.findViewById(R.id.questionCardLikeButton);
         }
     }
 }

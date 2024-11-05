@@ -17,7 +17,7 @@
 
     <!-- 게시글 제목 입력 -->
     <EditText
-        android:id="@+id/question_title"
+        android:id="@+id/editPostTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -31,17 +31,17 @@
 
     <!-- 주제 선택 -->
     <Spinner
-        android:id="@+id/interest_spinner"
+        android:id="@+id/editPostInterestSpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question_title" />
+        app:layout_constraintTop_toBottomOf="@id/editPostTitle" />
 
     <!-- 게시글 내용 입력 -->
     <EditText
-        android:id="@+id/question_content"
+        android:id="@+id/editPostContent"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
@@ -54,6 +54,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/interest_spinner" />
-
+        app:layout_constraintTop_toBottomOf="@id/editPostInterestSpinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>

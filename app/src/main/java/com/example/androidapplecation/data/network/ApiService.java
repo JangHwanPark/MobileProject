@@ -1,5 +1,4 @@
 package com.example.androidapplecation.data.network;
-import com.example.androidapplecation.data.model.LoginResponse;
 import com.example.androidapplecation.data.model.Question;
 import com.example.androidapplecation.data.model.User;
 import com.example.androidapplecation.data.model.Comment;

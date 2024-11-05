@@ -1,4 +1,4 @@
-package com.example.androidapplecation.data.model;
+package com.example.androidapplecation.data.network;
 
 public class LoginResponse {
     private boolean success;

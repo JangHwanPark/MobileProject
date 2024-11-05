@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +16,7 @@ import com.example.androidapplecation.ui.view.UserAccountView;
 
 public class UserAccountActivity extends BaseActivity implements UserAccountView {
     private TextView userName, userCompany;
-    private UserAccountPresenter presenter;
+    // private Button buttonEditProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +27,22 @@ public class UserAccountActivity extends BaseActivity implements UserAccountView
         setupUndoButton();
 
         // Presenter 초기화
-        presenter = new UserAccountPresenter(this);
+        UserAccountPresenter presenter = new UserAccountPresenter(this);
 
         // TextView 초기화
         userName = findViewById(R.id.userAccountInfoName);
         userCompany = findViewById(R.id.userAccountInfoCompany);
+        Button buttonEditProfile = findViewById(R.id.buttonEditProfile);
+        Button buttonLogout = findViewById(R.id.buttonLogout);
+
+        // 이벤트 리스너
+        buttonEditProfile.setOnClickListener(v -> {
+            Toast.makeText(this, "프로필 편집 클릭", Toast.LENGTH_SHORT).show();
+        });
+
+        buttonLogout.setOnClickListener(v -> {
+            Toast.makeText(this, "로그아웃 클릭", Toast.LENGTH_SHORT).show();
+        });
 
         // 사용자 정보 요청
         presenter.fetchUserInfo();
