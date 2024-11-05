@@ -7,8 +7,8 @@ import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.androidapplecation.activity.LoginActivity;
-import com.example.androidapplecation.activity.RegisterActivity;
+import com.example.androidapplecation.ui.activity.LoginActivity;
+import com.example.androidapplecation.ui.activity.RegisterActivity;
 
 
 public class MainActivity extends AppCompatActivity {

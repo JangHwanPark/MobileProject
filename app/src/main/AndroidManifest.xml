@@ -22,14 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.BaseActivity" />
-        <activity android:name=".activity.DashboardActivity" />
-        <activity android:name=".activity.CreatePostActivity" />
-        <activity android:name=".activity.UserAccountActivity" />
-        <activity android:name=".activity.PostDetailActivity" />
-        <activity android:name=".activity.EditPostActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.BaseActivity" />
+        <activity android:name=".ui.activity.DashboardActivity" />
+        <activity android:name=".ui.activity.CreatePostActivity" />
+        <activity android:name=".ui.activity.UserAccountActivity" />
+        <activity android:name=".ui.activity.PostDetailActivity" />
+        <activity android:name=".ui.activity.EditPostActivity" />
     </application>
 
 </manifest>
