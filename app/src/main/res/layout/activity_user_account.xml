@@ -96,7 +96,7 @@
 
     <!-- 게시글 RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_my_posts"
+        android:id="@+id/recyclerViewMyPosts"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
