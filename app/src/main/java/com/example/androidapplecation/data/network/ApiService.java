@@ -35,6 +35,9 @@ public interface ApiService {
     @POST("/api/v1/question/post/{qid}/delete")
     Call<Void> deleteQuestion(String token, int postId);
 
+    @POST("/api/v1/question/post/{qid}/great")
+    Call<Integer> greatQuestion(@Path("qid") int qid);
+
     // Comment
     @GET("/api/v1/comment/get/{qid}")
     Call<List<Comment>> getComments(@Path("qid") int qid);

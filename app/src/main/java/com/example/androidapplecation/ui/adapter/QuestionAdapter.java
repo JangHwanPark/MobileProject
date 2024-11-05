@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidapplecation.R;
 import com.example.androidapplecation.ui.activity.PostDetailActivity;
 import com.example.androidapplecation.data.model.Question;
+import com.example.androidapplecation.ui.presenter.LikePresenter;
+import com.example.androidapplecation.ui.view.LikeView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,10 +26,11 @@ import java.util.Locale;
  * {@code QuestionAdapter}는 {@link Question} 항목 목록을 표시하는 RecyclerView 어댑터입니다.
  * 키워드로 질문을 필터링하고, 질문 목록을 업데이트하는 기능을 제공합니다.
  */
-public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> implements LikeView {
     private List<Question> questionList;
     private final List<Question> allQuestions; // 전체 데이터를 저장하는 리스트
     private final Context context;
+    private final LikePresenter likePresenter;
 
     /**
      * {@code QuestionAdapter}를 생성합니다.
@@ -41,6 +44,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         this.questionList = new ArrayList<>(questionList); // 현재 리스트 초기화
         this.allQuestions = new ArrayList<>(questionList); // 전체 리스트 초기화
         this.context = context;
+        this.likePresenter = new LikePresenter(this); // LikePresenter를 생성할 때 LikeView로 QuestionAdapter를 전달
     }
 
     /**
@@ -82,6 +86,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
         // 좋아요 설정
         holder.questionLikeCount.setText("좋아요 " + question.getGreat() + "개");
+        holder.questionCardLikeButton.setOnClickListener(v -> {
+            likePresenter.likeQuestion(question.getId()); // 좋아요 API 호출
+        });
 
         // 아이템 클릭 이벤트
         holder.itemView.setOnClickListener(v -> {
@@ -93,10 +100,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             intent.putExtra("content", question.getContent()); // 내용 전달
             intent.putExtra("createAt", question.getCreatedAt());
             context.startActivity(intent);
-        });
-
-        holder.questionCardLikeButton.setOnClickListener(v -> {
-            Toast.makeText(context, "좋아요 버튼 클릭", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -171,5 +174,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             questionLikeCount = itemView.findViewById(R.id.questionLikeCount);
             questionCardLikeButton = itemView.findViewById(R.id.questionCardLikeButton);
         }
+    }
+
+    @Override
+    public void onLikeSuccess(int newLikeCount) {
+        Toast.makeText(context, "좋아요 성공! 새로운 좋아요 수: " + newLikeCount, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLikeFailure(String errorMessage) {
+        Toast.makeText(context, "좋아요 실패: " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 }
