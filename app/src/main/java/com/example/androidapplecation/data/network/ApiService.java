@@ -23,6 +23,9 @@ public interface ApiService {
     @GET("/api/v1/question/get/category/question")
     Call<List<Question>> getCategoryQuestion();
 
+    @GET("/api/v2/question/get/my-question/{uid}")
+    Call<List<Question>> showMyPostData(@Path("uid") int uid);
+
     @GET("/api/v1/question/get/category/free-board")
     Call<List<Question>> getCategoryFreeBoard();
 

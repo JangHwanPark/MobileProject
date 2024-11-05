@@ -80,6 +80,9 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         String formattedDate = dateFormat.format(question.getCreatedAt());
         holder.questionDate.setText(formattedDate);
 
+        // 좋아요 설정
+        holder.questionLikeCount.setText("좋아요 " + question.getGreat() + "개");
+
         // 아이템 클릭 이벤트
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PostDetailActivity.class);
@@ -89,7 +92,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             intent.putExtra("title", question.getTitle()); // 제목 전달
             intent.putExtra("content", question.getContent()); // 내용 전달
             intent.putExtra("createAt", question.getCreatedAt());
-            // Log.d("question", String.valueOf(intent));
             context.startActivity(intent);
         });
 
@@ -151,6 +153,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         TextView questionAuthor;
         TextView questionUserCompany;
         TextView questionDate;
+        TextView questionLikeCount;
         Button questionCardLikeButton;
 
         /**
@@ -165,6 +168,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             questionAuthor = itemView.findViewById(R.id.question_author);          // 사용자 이름
             questionUserCompany = itemView.findViewById(R.id.question_user_company); // 사용자 회사
             questionDate = itemView.findViewById(R.id.question_date);                // 작성 날짜
+            questionLikeCount = itemView.findViewById(R.id.questionLikeCount);
             questionCardLikeButton = itemView.findViewById(R.id.questionCardLikeButton);
         }
     }

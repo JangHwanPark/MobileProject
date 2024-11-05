@@ -48,13 +48,17 @@ public class UserAccountActivity extends BaseActivity implements UserAccountView
         presenter.fetchUserInfo();
     }
 
+    // 내가 작성한 게시글 출력
+    public void showMyPostData() {
+
+    }
+
     // UserAccountView 인터페이스 구현
     @Override
     public void showUserInfo(User user) {
         Log.d(TAG, "사용자 어카운트 정보 : " + user.toString());
         userName.setText(user.getName());
         userCompany.setText(user.getCompany());
-        
         Toast.makeText(this, "Hello, " + user.getName(), Toast.LENGTH_SHORT).show();
     }
 

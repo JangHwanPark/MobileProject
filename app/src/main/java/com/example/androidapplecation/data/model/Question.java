@@ -10,8 +10,8 @@ public class Question {
     private String category;  // 관련 질문 ID
     private Date createdAt;
     private Date updatedAt;
+    private int great;
     private User author;
-    private String company;
 
     // Constructor
     public Question(
@@ -21,7 +21,8 @@ public class Question {
             String content,
             String category,
             Date createdAt,
-            Date updatedAt
+            Date updatedAt,
+            int great
     ) {
         this.qid = qid;
         this.uid = uid;
@@ -30,6 +31,7 @@ public class Question {
         this.category = category;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.great = great;
     }
 
     // Getters and Setters
@@ -87,6 +89,14 @@ public class Question {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public int getGreat() {
+        return great;
+    }
+
+    public void setGreat(int great) {
+        this.great = great;
     }
 
     public User getAuthor() {

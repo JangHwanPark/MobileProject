@@ -62,7 +62,7 @@ public class CreatePostActivity extends BaseActivity implements CreatePostView {
         String category = categorySpinner.getSelectedItem().toString();
 
         if (category.equals("질문답변") || category.equals("자유 게시판")) {
-            Question newQuestion = new Question(null, -1, title, content, category, new Date(), new Date());
+            Question newQuestion = new Question(null, -1, title, content, category, new Date(), new Date(), 0);
             presenter.sendQuestionToServer(newQuestion);  // Presenter를 통해 서버에 전송
         }
         finish();
