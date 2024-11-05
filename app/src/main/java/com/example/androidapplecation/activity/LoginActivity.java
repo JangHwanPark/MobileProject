@@ -45,10 +45,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(
-                    LoginActivity.this,
-                    "아이디와 비밀번호를 입력해주세요.",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, "아이디와 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
 

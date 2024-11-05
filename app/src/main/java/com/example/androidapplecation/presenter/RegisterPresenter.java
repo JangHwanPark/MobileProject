@@ -1,14 +1,12 @@
 package com.example.androidapplecation.presenter;
 
-import androidx.annotation.NonNull;
-
 import com.example.androidapplecation.view.RegisterView;
 import com.example.androidapplecation.model.User;
+import com.example.androidapplecation.network.ApiCallTemplate;
 import com.example.androidapplecation.network.ApiService;
 import com.example.androidapplecation.network.RetrofitClient;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterPresenter {
@@ -21,26 +19,18 @@ public class RegisterPresenter {
     }
 
     public void registerUser(User newUser) {
-        Call<Void> callUser = apiService.registerUser(newUser);
-        callUser.enqueue(new Callback<Void>() {
+        Call<Void> call = apiService.registerUser(newUser);
+
+        new ApiCallTemplate<Void>() {
             @Override
-            public void onResponse(
-                    @NonNull Call<Void> call,
-                    @NonNull Response<Void> response) {
-                if (response.isSuccessful()) {
-                    view.showRegistrationSuccess(newUser);
-                } else {
-                    view.showRegistrationFailure(response.message());
-                }
+            protected void onSuccess(Response<Void> response) {
+                view.showRegistrationSuccess(newUser);
             }
 
             @Override
-            public void onFailure(
-                    @NonNull Call<Void> call,
-                    @NonNull Throwable t) {
-                view.showNetworkError(t.getMessage());
+            protected void onFailure(String errorMessage) {
+                view.showRegistrationFailure(errorMessage);
             }
-        });
+        }.execute(call);
     }
 }
-

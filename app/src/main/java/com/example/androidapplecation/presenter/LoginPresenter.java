@@ -1,6 +1,7 @@
 package com.example.androidapplecation.presenter;
 
 import com.example.androidapplecation.model.LoginResponse;
+import com.example.androidapplecation.network.ApiCallTemplate;
 import com.example.androidapplecation.network.ApiService;
 import com.example.androidapplecation.network.RetrofitClient;
 import com.example.androidapplecation.view.LoginView;
@@ -9,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginPresenter {
@@ -22,28 +22,23 @@ public class LoginPresenter {
     }
 
     public void loginUser(String email, String password) {
-        // 이메일과 비밀번호로 Map 생성
         Map<String, String> credentials = new HashMap<>();
         credentials.put("email", email);
         credentials.put("password", password);
 
         Call<LoginResponse> call = apiService.loginUser(credentials);
-        call.enqueue(new Callback<LoginResponse>() {
+
+        new ApiCallTemplate<LoginResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    // 로그인 성공
-                    String token = response.body().getData();
-                    view.showLoginSuccess(token);  // 성공 메시지 전달
-                } else {
-                    view.showLoginFailure("이메일 또는 비밀번호가 일치하지 않습니다.");
-                }
+            protected void onSuccess(Response<LoginResponse> response) {
+                String token = response.body().getData();
+                view.showLoginSuccess(token);
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                view.showNetworkError("서버와의 통신에 실패했습니다.");
+            protected void onFailure(String errorMessage) {
+                view.showLoginFailure("이메일 또는 비밀번호가 일치하지 않습니다.");
             }
-        });
+        }.execute(call);
     }
 }
