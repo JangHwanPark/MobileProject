@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserAccountView {
     void showUserInfo(User user);
-    void showUserPosts(List<Question> questions);
+    void showUserPosts(List<Question> questionsList);
     void showError(String message);
     String getToken();
 }

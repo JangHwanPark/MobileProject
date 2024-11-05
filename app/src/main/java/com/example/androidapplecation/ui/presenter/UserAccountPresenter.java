@@ -50,31 +50,24 @@ public class UserAccountPresenter {
 
     // 로그인한 사용자가 작성한 게시글 목록
     public void fetchUserPostList() {
-        // SharedPreferences에서 현재 로그인한 사용자의 uid 가져오기
-        SharedPreferences prefs = context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
-        int uid = prefs.getInt("uid", -1);  // 기본값 -1, uid가 없으면 -1 반환
-
-        if (uid == -1) {
-            view.showError("로그인이 필요합니다.");
-            return;
-        }
-
+        int uid = 61;
         Call<List<Question>> call = apiService.getMyPostData(uid);
+
         new ApiCallTemplate<List<Question>>() {
             @Override
             protected void onSuccess(Response<List<Question>> response) {
-                if (response.body() != null) {
-                    List<Question> questions = response.body();
-                    Log.d(TAG, "Fetched Questions: " + questions);  // 응답 데이터 로그 출력
-                    view.showUserPosts(questions); // 성공 시 View에 전달
+                List<Question> questions = response.body();
+                if (questions != null && !questions.isEmpty()) {
+                    // View에 데이터를 전달하여 RecyclerView 업데이트
+                    view.showUserPosts(questions);
                 } else {
-                    view.showError("게시글 데이터를 가져오지 못했습니다.");
+                    view.showError("작성한 게시글이 없습니다.");
                 }
             }
 
             @Override
             protected void onFailure(String errorMessage) {
-                view.showError("Failed to fetch user posts: " + errorMessage);
+                view.showError("게시글 목록을 불러오지 못했습니다: " + errorMessage);
             }
         }.execute(call);
     }

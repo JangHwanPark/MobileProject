@@ -66,13 +66,12 @@ public class UserAccountActivity extends BaseActivity implements UserAccountView
 
     // 내가 작성한 게시글 출력
     @Override
-    public void showUserPosts(List<Question> questions) {
+    public void showUserPosts(List<Question> questionsList) {
         // 어댑터에 새로운 질문 목록 설정
-        questionAdapter.updateQuestions(questions);
-        // 데이터를 확인하는 로그 추가
-        Log.d(TAG, "Fetched user posts: " + questions.size()); // 데이터 크기 확인
+        questionAdapter.updateQuestions(questionsList);
+
         // 게시글이 없을 때 메시지 표시
-        if (questions.isEmpty()) {
+        if (questionsList.isEmpty()) {
             Toast.makeText(this, "작성한 게시글이 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
