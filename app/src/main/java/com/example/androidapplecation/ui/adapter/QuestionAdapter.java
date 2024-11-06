@@ -87,7 +87,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         // 좋아요 설정
         holder.questionLikeCount.setText("좋아요 " + question.getGreat() + "개");
         holder.questionCardLikeButton.setOnClickListener(v -> {
-            likePresenter.likeQuestion(question.getId()); // 좋아요 API 호출
+            // likePresenter.likeQuestion(question.getId()); // 좋아요 API 호출
+            likePresenter.likeQuestion(question.getId(), position); // 좋아요 API 호출과 함께 위치 전달
         });
 
         // 아이템 클릭 이벤트
@@ -177,8 +178,10 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
     }
 
     @Override
-    public void onLikeSuccess(int newLikeCount) {
-        Toast.makeText(context, "좋아요 성공! 새로운 좋아요 수: " + newLikeCount, Toast.LENGTH_SHORT).show();
+    public void onLikeSuccess(int newLikeCount, int position) {
+        Question likedQuestion = questionList.get(position);
+        likedQuestion.setGreat(newLikeCount);  // 좋아요 수 업데이트
+        notifyItemChanged(position);  // 변경된 항목만 업데이트
     }
 
     @Override

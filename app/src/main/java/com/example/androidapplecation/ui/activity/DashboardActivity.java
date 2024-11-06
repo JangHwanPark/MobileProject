@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,7 +19,6 @@ import com.example.androidapplecation.ui.adapter.UserAdapter;
 import com.example.androidapplecation.data.model.Question;
 import com.example.androidapplecation.data.model.User;
 import com.example.androidapplecation.ui.presenter.DashboardPresenter;
-import com.example.androidapplecation.ui.presenter.LikePresenter;
 import com.example.androidapplecation.ui.view.DashboardView;
 
 import java.util.ArrayList;

@@ -16,7 +16,6 @@ import com.example.androidapplecation.R;
 import com.example.androidapplecation.data.model.Question;
 import com.example.androidapplecation.data.model.User;
 import com.example.androidapplecation.ui.adapter.QuestionAdapter;
-import com.example.androidapplecation.ui.presenter.LikePresenter;
 import com.example.androidapplecation.ui.presenter.UserAccountPresenter;
 import com.example.androidapplecation.ui.view.UserAccountView;
 

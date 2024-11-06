@@ -17,13 +17,13 @@ public class LikePresenter {
         this.apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
     }
 
-    public void likeQuestion(int qid) {
+    public void likeQuestion(int qid, int position) {
         Call<Integer> call = apiService.greatQuestion(qid);
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (response.isSuccessful()) {
-                    view.onLikeSuccess(response.body());
+                    view.onLikeSuccess(response.body(), position); // 위치와 함께 성공 알림
                 } else {
                     view.onLikeFailure("Failed to like the question.");
                 }
