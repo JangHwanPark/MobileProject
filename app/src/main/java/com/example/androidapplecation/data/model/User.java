@@ -17,12 +17,14 @@ public class User {
             String password,
             String name,
             String birth,
-            String interest) {
+            String interest,
+            String company) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.birth = birth;
         this.interest = interest;
+        this.company = company;
     }
 
     // Getters and Setters

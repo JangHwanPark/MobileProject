@@ -18,7 +18,7 @@ import com.example.androidapplecation.util.FormValidation;
 
 public class RegisterActivity extends BaseActivity implements RegisterView {
 
-    private EditText editTextEmail, editTextPassword, editTextName, editTextBirth;
+    private EditText editTextEmail, editTextPassword, editTextName, editTextBirth, editTextCompany;
     private Spinner interestSpinner;
     private Button btnSubmit;
     private FormValidation formValidation;
@@ -43,6 +43,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
         editTextPassword = findViewById(R.id.editText_password);
         editTextName = findViewById(R.id.editText_name);
         editTextBirth = findViewById(R.id.editText_birth);
+        editTextCompany = findViewById(R.id.editTextCompany);
         interestSpinner = findViewById(R.id.interest_spinner);
         btnSubmit = findViewById(R.id.btn_submit);
     }
@@ -97,7 +98,8 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
         String password = editTextPassword.getText().toString().trim();
         String name = editTextName.getText().toString().trim();
         String birth = editTextBirth.getText().toString().trim();
+        String company = editTextCompany.getText().toString().trim();
         String interest = interestSpinner.getSelectedItem().toString();
-        return new User(email, password, name, birth, interest);
+        return new User(email, password, name, birth, interest, company);
     }
 }
