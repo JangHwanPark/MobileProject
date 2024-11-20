@@ -24,7 +24,7 @@ public class PostDetailPresenter {
 
     public void editQuestion(int postId, String newContent) {
         String token = getToken();
-        Call<Void> call = apiService.editQuestion(token, postId, newContent);
+        Call<Void> call = apiService.editQuestion(postId, newContent);
 
         new ApiCallTemplate<Void>() {
             @Override

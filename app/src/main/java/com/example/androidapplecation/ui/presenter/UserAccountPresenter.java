@@ -50,7 +50,9 @@ public class UserAccountPresenter {
 
     // 로그인한 사용자가 작성한 게시글 목록
     public void fetchUserPostList() {
-        int uid = 61;
+        // SharedPreferences에서 로그인한 사용자의 uid 가져오기
+        SharedPreferences prefs = context.getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        int uid = prefs.getInt("uid", -1); // uid가 저장되지 않았으면 -1 반환
         Call<List<Question>> call = apiService.getMyPostData(uid);
 
         new ApiCallTemplate<List<Question>>() {

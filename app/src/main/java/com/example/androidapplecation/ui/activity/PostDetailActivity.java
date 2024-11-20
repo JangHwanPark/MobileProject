@@ -126,6 +126,12 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
             if (itemId == R.id.actionEditPost) {
                 Toast.makeText(this, "게시글 수정하기", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, EditPostActivity.class);
+
+                // 게시글 데이터를 Intent에 추가하여 EditPostActivity로 전달
+                intent.putExtra("qid", getIntent().getIntExtra("qid", getQid()));
+                intent.putExtra("title", getIntent().getStringExtra("title"));
+                intent.putExtra("content", getIntent().getStringExtra("content"));
+
                 startActivity(intent);
                 return true;
             } else if (itemId == R.id.actionDeletePost) {

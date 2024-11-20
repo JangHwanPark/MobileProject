@@ -34,6 +34,20 @@ public class Question {
         this.great = great;
     }
 
+    public Question(
+            Integer qid,
+            String title,
+            String content,
+            String category,
+            Date updatedAt
+    ) {
+        this.qid = qid;
+        this.category = category;
+        this.title = title;
+        this.content = content;
+        this.updatedAt = updatedAt;
+    }
+
     // Getters and Setters
     public Integer getId() {
         return qid;

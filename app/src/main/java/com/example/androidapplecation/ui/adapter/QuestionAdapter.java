@@ -87,7 +87,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         // 좋아요 설정
         holder.questionLikeCount.setText("좋아요 " + question.getGreat() + "개");
         holder.questionCardLikeButton.setOnClickListener(v -> {
-            // likePresenter.likeQuestion(question.getId()); // 좋아요 API 호출
             likePresenter.likeQuestion(question.getId(), position); // 좋아요 API 호출과 함께 위치 전달
         });
 

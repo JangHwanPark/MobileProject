@@ -2,6 +2,7 @@ package com.example.androidapplecation.ui.activity;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,13 +56,20 @@ public class UserAccountActivity extends BaseActivity implements UserAccountView
         userPostsRecyclerView.setAdapter(questionAdapter);
 
         // 이벤트 리스너
-        buttonEditProfile.setOnClickListener(v -> {
-            Toast.makeText(this, "프로필 편집 클릭", Toast.LENGTH_SHORT).show();
-        });
+        // 프로필 수정 버튼
+        buttonEditProfile.setOnClickListener(v -> openEditProfile());
 
+        // 로그아웃 버튼
         buttonLogout.setOnClickListener(v -> {
             Toast.makeText(this, "로그아웃 클릭", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    public void openEditProfile() {
+        Toast.makeText(this, "프로필 편집 클릭", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(UserAccountActivity.this, EditUserProfile.class);
+        startActivity(intent);
+        finish();
     }
 
     // 내가 작성한 게시글 출력
