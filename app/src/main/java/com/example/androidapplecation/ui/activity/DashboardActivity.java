@@ -83,7 +83,6 @@ public class DashboardActivity extends BaseActivity implements DashboardView {
     }
 
     // 좋아요 버튼 기능 구현
-
     private void setupSearchView() {
         SearchView searchView = findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

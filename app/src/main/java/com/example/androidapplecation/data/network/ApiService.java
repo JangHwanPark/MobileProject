@@ -30,7 +30,7 @@ public interface ApiService {
     Call<List<Question>> getCategoryFreeBoard();
 
     @POST("/api/v1/question/post/{qid}/update")
-    Call<Void> editQuestion(@Path("qid") int postId, @Body String newContent);
+    Call<Void> editQuestion(@Path("qid") int postId, @Body Question newContent);
 
     @POST("/api/v1/question/post/{qid}/delete")
     Call<Void> deleteQuestion(String token, int postId);

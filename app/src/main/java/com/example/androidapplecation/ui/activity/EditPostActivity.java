@@ -78,17 +78,18 @@ public class EditPostActivity extends BaseActivity {
 
         if (category.equals("질문답변") || category.equals("자유 게시판")) {
             // Question 객체 생성
-            Question newQuestion = new Question(qid, title, content, category, new Date());
+            Question updatedQuestion = new Question(qid, title, content, category, new Date());
+
             // Retrofit으로 POST 요청 보내기
-            sendQuestionToServer(newQuestion);
+            sendQuestionToServer(qid, updatedQuestion);
+            Log.d(TAG, "전송버튼 클릭");
         }
-        Toast.makeText(this, "기능 구현중", Toast.LENGTH_SHORT).show();
 
         // 액티비티 종료 후 이전화면으로 돌아가기
         finish();
     }
 
-    private void sendQuestionToServer(Question question) {
+    private void sendQuestionToServer(int qid, Question question) {
         // Retrofit 클라이언트 생성
         ApiService apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
 
@@ -100,35 +101,26 @@ public class EditPostActivity extends BaseActivity {
             return;
         }
 
+        Log.d(TAG, "question: " + question.getId() + question.getTitle() + question.getContent() + question.getUpdatedAt());
+
         // 질문을 서버로 전송
-        Call<Void> call = apiService.saveQuestion(token, question);
+        Call<Void> call = apiService.editQuestion(qid, question);  // qid와 수정된 Question 객체를 전송
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Log.d(TAG, "서버에 질문이 성공적으로 저장되었습니다.");
+                    Log.d(TAG, "서버에 질문이 성공적으로 수정되었습니다.");
                     // 성공적으로 저장됨
-                    Toast.makeText(
-                            EditPostActivity.this,
-                            "질문이 서버에 저장되었습니다.",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditPostActivity.this, "질문이 수정되었습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.e(TAG, "서버에 질문 저장 실패: " + response.errorBody());
-                    // 저장 실패
-                    Toast.makeText(
-                            EditPostActivity.this,
-                            "질문 저장에 실패했습니다.",
-                            Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "서버에 질문 수정 실패: " + response.errorBody());
+                    Toast.makeText(EditPostActivity.this, "질문 수정에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                // 네트워크 오류 처리
-                Toast.makeText(
-                        EditPostActivity.this,
-                        "서버와의 통신에 실패했습니다.",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPostActivity.this, "서버와의 통신에 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }

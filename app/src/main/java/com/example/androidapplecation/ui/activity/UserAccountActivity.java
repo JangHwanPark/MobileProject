@@ -61,7 +61,18 @@ public class UserAccountActivity extends BaseActivity implements UserAccountView
 
         // 로그아웃 버튼
         buttonLogout.setOnClickListener(v -> {
-            Toast.makeText(this, "로그아웃 클릭", Toast.LENGTH_SHORT).show();
+            // SharedPreferences에서 토큰 제거
+            SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove("token");  // "token" 키 값으로 저장된 토큰을 삭제
+            editor.apply();
+
+            // 로그인 화면으로 이동
+            Intent intent = new Intent(UserAccountActivity.this, LoginActivity.class);
+            startActivity(intent);
+
+            // 현재 화면 종료
+            finish();
         });
     }
 

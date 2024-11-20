@@ -1,6 +1,7 @@
 package com.example.androidapplecation.ui.presenter;
 
 import com.example.androidapplecation.data.model.Comment;
+import com.example.androidapplecation.data.model.Question;
 import com.example.androidapplecation.data.network.ApiCallTemplate;
 import com.example.androidapplecation.data.network.ApiService;
 import com.example.androidapplecation.data.network.RetrofitClient;
@@ -22,7 +23,7 @@ public class PostDetailPresenter {
         this.apiService = RetrofitClient.getRetrofitInstance().create(ApiService.class);
     }
 
-    public void editQuestion(int postId, String newContent) {
+    public void editQuestion(int postId, Question newContent) {
         String token = getToken();
         Call<Void> call = apiService.editQuestion(postId, newContent);
 
