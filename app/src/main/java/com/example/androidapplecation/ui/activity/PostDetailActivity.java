@@ -131,7 +131,7 @@ public class PostDetailActivity extends BaseActivity implements PostDetailView {
                 intent.putExtra("qid", getIntent().getIntExtra("qid", getQid()));
                 intent.putExtra("title", getIntent().getStringExtra("title"));
                 intent.putExtra("content", getIntent().getStringExtra("content"));
-
+                intent.putExtra("category", getIntent().getStringExtra("category"));
                 startActivity(intent);
                 return true;
             } else if (itemId == R.id.actionDeletePost) {

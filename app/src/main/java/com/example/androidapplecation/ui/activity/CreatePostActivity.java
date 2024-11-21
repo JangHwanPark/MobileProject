@@ -1,8 +1,11 @@
 // CreatePostActivity.java
 package com.example.androidapplecation.ui.activity;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,7 +26,7 @@ public class CreatePostActivity extends BaseActivity implements CreatePostView {
 
     private EditText titleEditText;
     private EditText contentEditText;
-    private Spinner categorySpinner;
+    private Spinner categorySpinner, interestSpinner;
     private CreatePostPresenter presenter;
 
     @Override
@@ -39,7 +42,7 @@ public class CreatePostActivity extends BaseActivity implements CreatePostView {
         titleEditText = findViewById(R.id.question_title);
         contentEditText = findViewById(R.id.question_content);
         categorySpinner = findViewById(R.id.category_spinner);
-        Spinner interestSpinner = findViewById(R.id.interest_spinner);
+        interestSpinner = findViewById(R.id.interest_spinner);
 
         ArrayAdapter<CharSequence> categoryAdapter = ArrayAdapter.createFromResource(
                 this, R.array.post_categories, android.R.layout.simple_spinner_item);
@@ -57,12 +60,13 @@ public class CreatePostActivity extends BaseActivity implements CreatePostView {
     }
 
     private void handleClickSubmitButton() {
+        String interest = interestSpinner.getSelectedItem().toString();
         String title = titleEditText.getText().toString();
         String content = contentEditText.getText().toString();
         String category = categorySpinner.getSelectedItem().toString();
 
         if (category.equals("질문답변") || category.equals("자유 게시판")) {
-            Question newQuestion = new Question(null, -1, title, content, category, new Date(), new Date(), 0);
+            Question newQuestion = new Question(null, -1, interest, title, content, category, new Date(), new Date(), 0);
             presenter.sendQuestionToServer(newQuestion);  // Presenter를 통해 서버에 전송
         }
         finish();

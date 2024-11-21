@@ -98,8 +98,6 @@ public class UserAccountActivity extends BaseActivity implements UserAccountView
     // UserAccountView 인터페이스 구현
     @Override
     public void showUserInfo(User user) {
-        Log.d(TAG, "사용자 어카운트 정보 : " + user.toString());
-
         // uid 저장
         int userId = user.getUid();  // userId 변수에 저장
         SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);

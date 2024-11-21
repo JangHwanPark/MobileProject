@@ -5,6 +5,7 @@ import java.util.Date;
 public class Question {
     private Integer qid;
     private int uid;
+    private String interest;
     private String title;
     private String content;
     private String category;  // 관련 질문 ID
@@ -17,6 +18,7 @@ public class Question {
     public Question(
             Integer qid,
             int uid,
+            String interest,
             String title,
             String content,
             String category,
@@ -26,6 +28,7 @@ public class Question {
     ) {
         this.qid = qid;
         this.uid = uid;
+        this.interest=interest;
         this.title = title;
         this.content = content;
         this.category = category;
@@ -36,12 +39,14 @@ public class Question {
 
     public Question(
             Integer qid,
+            String interest,
             String title,
             String content,
             String category,
             Date updatedAt
     ) {
         this.qid = qid;
+        this.interest = interest;
         this.category = category;
         this.title = title;
         this.content = content;
@@ -63,6 +68,14 @@ public class Question {
 
     public void setUid(int uid) {
         this.uid = uid;
+    }
+
+    public String getInterest() {
+        return interest;
+    }
+
+    public void setInterest(String interest) {
+        this.interest = interest;
     }
 
     public String getTitle() {
